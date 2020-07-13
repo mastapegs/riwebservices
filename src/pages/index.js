@@ -1,9 +1,10 @@
 import React from 'react'
+import { Typography } from '@material-ui/core'
 
 const Index = () => {
   return (
     <>
-      <h1>Hello, World!</h1>
+      <Typography variant='h1'>Hello, World!</Typography>
     </>
   )
 }
