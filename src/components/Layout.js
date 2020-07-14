@@ -1,9 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { CssBaseline } from '@material-ui/core';
 
 const Layout = ({ children: page }) => {
   return (
     <>
+      <CssBaseline />
       <Helmet>
         <link
           rel="stylesheet"
@@ -12,6 +14,10 @@ const Layout = ({ children: page }) => {
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Helmet>
       {page}
