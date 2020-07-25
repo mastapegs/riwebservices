@@ -53,7 +53,7 @@ const tiers = [
     title: 'Website + Blog',
     subheader: 'Most popular',
     price: '3000',
-    monthlyPrice: '50',
+    monthlyPrice: '60',
     description: [
       'Everything included in a Multi-Page Site w/ Contact Form',
       'A blog (or more than one!) with the ability to make as many new posts as you\'d like',
@@ -65,7 +65,7 @@ const tiers = [
   {
     title: 'E-Commerce Web Application',
     price: '5000',
-    monthlyPrice: '100',
+    monthlyPrice: '120',
     description: [
       'Everything included in a Website + Blog',
       'Shopify Integration',
