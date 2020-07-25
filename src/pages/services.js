@@ -95,14 +95,14 @@ const Services = () => {
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+            <Grid item key={tier.title} xs={12} sm={tier.title === 'E-Commerce Web Application' ? 12 : 6} md={4}>
               <Card>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  action={tier.title === 'Website + Blog' ? <StarIcon /> : null}
                   className={classes.cardHeader}
                 />
                 <CardContent>

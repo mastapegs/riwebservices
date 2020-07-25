@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import LanguageIcon from '@material-ui/icons/Language'
 import { makeStyles } from '@material-ui/core/styles'
