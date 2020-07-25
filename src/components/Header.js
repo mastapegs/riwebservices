@@ -7,6 +7,10 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
+  },
+  brand: {
+    color: 'inherit',
+    textDecoration: 'none'
   }
 }))
 
@@ -17,9 +21,11 @@ const Header = () => {
       <AppBar position="relative">
         <Toolbar>
           <LanguageIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            RI Web Services
+          <Link className={classes.brand} to='/'>
+            <Typography variant="h6" color="inherit" noWrap>
+              RI Web Services
           </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </>
