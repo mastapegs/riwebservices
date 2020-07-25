@@ -10,6 +10,11 @@ const useStyles = makeStyles(theme => ({
   },
   brand: {
     color: 'inherit',
+    textDecoration: 'none',
+    marginRight: theme.spacing(4),
+  },
+  links: {
+    color: 'inherit',
     textDecoration: 'none'
   }
 }))
@@ -24,8 +29,15 @@ const Header = () => {
           <Link className={classes.brand} to='/'>
             <Typography variant="h6" color="inherit" noWrap>
               RI Web Services
-          </Typography>
+            </Typography>
           </Link>
+          <div>
+            <Link to='/pricing' className={classes.links}>
+              <Typography variant="h6" color="inherit" noWrap>
+                Pricing
+              </Typography>
+            </Link>
+          </div>
         </Toolbar>
       </AppBar>
     </>
