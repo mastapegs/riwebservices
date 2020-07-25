@@ -84,7 +84,7 @@ const Services = () => {
   return (
     <>
       {/* Hero unit */}
-      <Container maxWidth="sm" component="main" className={classes.heroContent}>
+      <Container maxWidth="sm" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
           Custom Web Solutions
         </Typography>
@@ -96,7 +96,7 @@ const Services = () => {
       <Container maxWidth="md">
         <Grid container spacing={5} alignItems="flex-start">
           {tiers.map((tier) => (
-            // Enterprise card is full width at sm breakpoint
+            // E-Commerce card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} sm={tier.title === 'E-Commerce Web Application' ? 12 : 6} md={4}>
               <Card>
                 <CardHeader
