@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+// import sgMail from '@sendgrid/mail'
 import {
   Button,
   Container,
@@ -42,7 +43,7 @@ const useContactData = () => ([
   },
 ])
 
-const handleSubmit = (event, name, businessName, phone, email, message) => {
+const handleSubmit = async (event, name, businessName, phone, email, message) => {
   event.preventDefault()
   // alert(
   //   `Your Name: ${name}\n` +
@@ -51,6 +52,29 @@ const handleSubmit = (event, name, businessName, phone, email, message) => {
   //   `Email: ${email}\n` +
   //   `Message: ${message}`
   // )
+  const response = await fetch('/api/sendEmail', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify({
+      name,
+      businessName,
+      phone,
+      email,
+      message
+    })
+  }).catch(error => console.log(error))
+  if (response) {
+    const data = await response.json()
+    console.log(data)
+  }
+  
 }
 
 const Contact = () => {
