@@ -44,7 +44,7 @@ export default function SimpleBottomNavigation() {
     >
       <BottomNavigationAction label="Home" icon={<HomeIcon />} />
       <BottomNavigationAction label="Pricing" icon={<AttachMoneyIcon />} />
-      <BottomNavigationAction label="Contact" icon={<ContactMailIcon />} />
+      {/* <BottomNavigationAction label="Contact" icon={<ContactMailIcon />} /> */}
     </BottomNavigation>
   );
 }
