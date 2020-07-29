@@ -8,6 +8,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Card,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -42,29 +43,32 @@ const Contact = () => {
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
             Whether you have questions on how my services can help your business grow, or simply want to talk about your online web presence, it would be my pleasure to speak with you.
           </Typography>
-          <TableContainer>
-            <Table>
-              <TableHead>
+          <Card>
+            <TableContainer>
+              <Table>
+                <TableHead>
 
-              </TableHead>
-              <TableBody>
-                {contactData.map(({ contactType, contactData }) => (
-                  <TableRow>
-                    <TableCell>
-                      <Typography>
-                        {contactType}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {contactData}
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {contactData.map(({ contactType, contactData }) => (
+                    <TableRow>
+                      <TableCell>
+                        <Typography>
+                          {contactType}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography>
+                          {contactData}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Card>
+
         </Container>
       </div>
     </>
