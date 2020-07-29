@@ -5,9 +5,19 @@ export default async (req, res) => {
   const msg = {
     to: 'mpagan@riwebservices.com',
     from: req.body.email,
-    subject: `${name} | ${businessName}`,
-    text: req.body.message,
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    subject: `${req.body.name} | ${req.body.businessName}`,
+    text:
+      `Name: ${req.body.name}\n` +
+      `Email: ${req.body.email}\n` +
+      `Phone: ${req.body.phone}\n` +
+      `Business Name: ${req.body.businessName}\n` +
+      `Message: ${req.body.message}`,
+    html:
+      `Name: ${req.body.name}\n` +
+      `Email: ${req.body.email}\n` +
+      `Phone: ${req.body.phone}\n` +
+      `Business Name: ${req.body.businessName}\n` +
+      `Message: ${req.body.message}`
   }
   await sgMail.send(msg)
 
