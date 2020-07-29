@@ -13,11 +13,11 @@ export default async (req, res) => {
       `Business Name: ${req.body.businessName}\n` +
       `Message: ${req.body.message}`,
     html:
-      `Name: ${req.body.name}\n` +
-      `Email: ${req.body.email}\n` +
-      `Phone: ${req.body.phone}\n` +
-      `Business Name: ${req.body.businessName}\n` +
-      `Message: ${req.body.message}`
+      `<strong>Name:</strong> ${req.body.name}<br>` +
+      `<strong>Email:</strong>: ${req.body.email}<br>` +
+      `<strong>Phone:</strong> ${req.body.phone}<br>` +
+      `<strong>Business Name:</strong> ${req.body.businessName}<br>` +
+      `<strong>Message:</strong> ${req.body.message}`
   }
   await sgMail.send(msg)
 
