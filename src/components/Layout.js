@@ -1,5 +1,4 @@
 import React from 'react'
-import MaterialSetup from './MaterialSetup'
 import Header from './Header'
 import BottomNav from './BottomNav'
 import { makeStyles } from '@material-ui/core/styles'
@@ -14,7 +13,6 @@ const Layout = ({ children: page }) => {
   const classes = useStyles()
   return (
     <>
-      <MaterialSetup />
       <Header />
       <main className={classes.main}>
         {page}
