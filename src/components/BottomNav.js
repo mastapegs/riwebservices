@@ -35,6 +35,7 @@ export default function SimpleBottomNavigation() {
             navigate('/pricing')
             break
           case 2:
+            navigate('/contact')
             break
           default:
         }
