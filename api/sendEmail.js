@@ -17,7 +17,7 @@ export default async (req, res) => {
       `<strong>Email:</strong>: ${req.body.email}<br>` +
       `<strong>Phone:</strong> ${req.body.phone}<br>` +
       `<strong>Business Name:</strong> ${req.body.businessName}<br>` +
-      `<strong>Message:</strong> ${req.body.message}`
+      `<strong>Message:</strong> ${req.body.message}<br>`
   }
   await sgMail.send(msg)
 
