@@ -43,25 +43,30 @@ const useContactData = () => ([
   },
 ])
 
-const handleSubmit = async (event, name, businessName, phone, email, message) => {
+const handleSubmit = async ({
+  event,
+  name,
+  businessName,
+  phone,
+  email,
+  message,
+  setName,
+  setBusinessName,
+  setEmail,
+  setPhone,
+  setMessage,
+}) => {
   event.preventDefault()
-  // alert(
-  //   `Your Name: ${name}\n` +
-  //   `Business Name: ${businessName}\n` +
-  //   `Phone: ${phone}\n` +
-  //   `Email: ${email}\n` +
-  //   `Message: ${message}`
-  // )
   const response = await fetch('/api/sendEmail', {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json'
     },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
     body: JSON.stringify({
       name,
       businessName,
@@ -74,7 +79,11 @@ const handleSubmit = async (event, name, businessName, phone, email, message) =>
     const data = await response.json()
     console.log(data)
   }
-  
+  setName('')
+  setEmail('')
+  setBusinessName('')
+  setPhone('')
+  setMessage('')
 }
 
 const Contact = () => {
@@ -127,7 +136,21 @@ const Contact = () => {
           <Typography gutterBottom component='h2' variant='h2' align='center'>
             {'Fill out this form to start the conversation'}
           </Typography>
-          <form className={classes.form} noValidate onSubmit={event => handleSubmit(event, name, businessName, phone, email, message)}>
+          <form className={classes.form} noValidate onSubmit={event => handleSubmit(
+            {
+              event,
+              name,
+              businessName,
+              phone,
+              email,
+              message,
+              setName,
+              setBusinessName,
+              setEmail,
+              setPhone,
+              setMessage,
+            }
+          )}>
             <TextField
               variant="outlined"
               margin="normal"
