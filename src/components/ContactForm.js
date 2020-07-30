@@ -55,6 +55,7 @@ const ContactForm = () => {
           <TextField
             variant="outlined"
             margin="normal"
+            size="small"
             required
             fullWidth
             id="name"
@@ -73,6 +74,7 @@ const ContactForm = () => {
           <TextField
             variant="outlined"
             margin="normal"
+            size="small"
             fullWidth
             id="businessName"
             label="Business Name"
@@ -90,6 +92,7 @@ const ContactForm = () => {
           <TextField
             variant="outlined"
             margin="normal"
+            size="small"
             required
             fullWidth
             id="phone"
@@ -108,6 +111,7 @@ const ContactForm = () => {
           <TextField
             variant="outlined"
             margin="normal"
+            size="small"
             required
             fullWidth
             id="email"
@@ -126,6 +130,7 @@ const ContactForm = () => {
           <TextField
             variant="outlined"
             margin="normal"
+            size="small"
             required
             fullWidth
             id="message"
