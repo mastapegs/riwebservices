@@ -17,11 +17,11 @@ const Contact = () => {
   const classes = useStyles()
   return (
     <>
-      <div className={classes.heroContent}>
-        <ContactTable />
-      </div>
       <div className={classes.formContent}>
         <ContactForm />
+      </div>
+      <div className={classes.heroContent}>
+        <ContactTable />
       </div>
     </>
   )

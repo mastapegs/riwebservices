@@ -35,7 +35,7 @@ const ContactForm = () => {
     <>
       <Container>
         <Typography gutterBottom component='h2' variant='h2' align='center'>
-          {'Fill out this form to start the conversation'}
+          {'Start the Conversation'}
         </Typography>
         <form className={classes.form} noValidate onSubmit={event => handleContactSubmit(
           {
