@@ -41,7 +41,7 @@ const ContactTable = () => {
               </TableHead>
               <TableBody>
                 {contactData.map(({ contactType, contactData }) => (
-                  <TableRow>
+                  <TableRow key={contactType}>
                     <TableCell>
                       <Typography>
                         {contactType}
