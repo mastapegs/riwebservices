@@ -11,7 +11,9 @@ import {
   TableCell,
   TextField,
   Card,
+  InputAdornment,
 } from '@material-ui/core'
+import AccountCircle from '@material-ui/icons/AccountCircle'
 import { makeStyles } from '@material-ui/core/styles'
 import handleContactSubmit from '../functions/handleContactSubmission'
 
@@ -118,6 +120,13 @@ const Contact = () => {
               name="name"
               value={name}
               onChange={event => setName(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               variant="outlined"
