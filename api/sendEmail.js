@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail'
 
-export default async (req, res) => {
+const send = async req => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   const msg = {
     to: 'mpagan@riwebservices.com',
@@ -19,10 +19,21 @@ export default async (req, res) => {
       `<strong>Email:</strong>: ${req.body.email}<br>` +
       `<strong>Message:</strong> ${req.body.message}<br>`
   }
-  await sgMail.send(msg)
+  let emailSuccess = true
+  await sgMail.send(msg).catch(error => {
+    emailSuccess = false
+  })
+  return emailSuccess
+}
 
+const sendEmail = async (req, res) => {
+
+  const emailSuccess = await send(req)
+  
   res.json({
     data: req.body,
-    apiKey: process.env.SENDGRID_API_KEY
+    emailSuccess
   })
 }
+
+export default sendEmail
