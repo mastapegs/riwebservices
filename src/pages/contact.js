@@ -13,7 +13,11 @@ import {
   Card,
   InputAdornment,
 } from '@material-ui/core'
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import FaceIcon from '@material-ui/icons/Face'
+import BusinessIcon from '@material-ui/icons/Business'
+import PhoneIcon from '@material-ui/icons/Phone'
+import EmailIcon from '@material-ui/icons/Email'
+import MessageIcon from '@material-ui/icons/Message'
 import { makeStyles } from '@material-ui/core/styles'
 import handleContactSubmit from '../functions/handleContactSubmission'
 
@@ -123,7 +127,7 @@ const Contact = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AccountCircle />
+                    <FaceIcon />
                   </InputAdornment>
                 ),
               }}
@@ -137,6 +141,13 @@ const Contact = () => {
               name="businessName"
               value={businessName}
               onChange={event => setBusinessName(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <BusinessIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               variant="outlined"
@@ -148,6 +159,13 @@ const Contact = () => {
               name="phone"
               value={phone}
               onChange={event => setPhone(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               variant="outlined"
@@ -159,6 +177,13 @@ const Contact = () => {
               name="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               variant="outlined"
@@ -172,6 +197,13 @@ const Contact = () => {
               rows={6}
               value={message}
               onChange={event => setMessage(event.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MessageIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               type="submit"
