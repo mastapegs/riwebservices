@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import ContactTable from '../components/contactTable'
+import ContactTable from '../components/ContactTable'
 import ContactForm from '../components/ContactForm'
 
 const useStyles = makeStyles(theme => ({
