@@ -4,7 +4,7 @@ export default async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   const msg = {
     to: 'mpagan@riwebservices.com',
-    from: req.body.email,
+    from: 'mpagan@riwebservices.com',
     subject: `${req.body.name} | ${req.body.businessName}`,
     text:
       `Name: ${req.body.name}\n` +
