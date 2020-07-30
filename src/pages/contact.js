@@ -3,14 +3,7 @@ import {
   Button,
   Container,
   Typography,
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
   TextField,
-  Card,
   InputAdornment,
 } from '@material-ui/core'
 import FaceIcon from '@material-ui/icons/Face'
@@ -20,6 +13,7 @@ import EmailIcon from '@material-ui/icons/Email'
 import MessageIcon from '@material-ui/icons/Message'
 import { makeStyles } from '@material-ui/core/styles'
 import handleContactSubmit from '../functions/handleContactSubmission'
+import ContactTable from '../components/contactTable'
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -38,20 +32,8 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const useContactData = () => ([
-  {
-    contactType: 'Phone',
-    contactData: '401-332-7084',
-  },
-  {
-    contactType: 'Email',
-    contactData: 'mpagan@riwebservices.com',
-  },
-])
-
 const Contact = () => {
   const classes = useStyles()
-  const contactData = useContactData()
   const [name, setName] = useState('')
   const [businessName, setBusinessName] = useState('')
   const [phone, setPhone] = useState('')
@@ -60,39 +42,7 @@ const Contact = () => {
   return (
     <>
       <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Let's Talk
-          </Typography>
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Whether you have questions on how my services can help your business grow, or simply want to talk about your online web presence, it would be my pleasure to speak with you.
-          </Typography>
-          <Card>
-            <TableContainer>
-              <Table>
-                <TableHead>
-
-                </TableHead>
-                <TableBody>
-                  {contactData.map(({ contactType, contactData }) => (
-                    <TableRow>
-                      <TableCell>
-                        <Typography>
-                          {contactType}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography>
-                          {contactData}
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Card>
-        </Container>
+        <ContactTable />
       </div>
       <div className={classes.formContent}>
         <Container>
