@@ -43,7 +43,7 @@ const useContactData = () => ([
   },
 ])
 
-const handleSubmit = async ({
+const handleContactSubmit = async ({
   event,
   name,
   businessName,
@@ -136,7 +136,7 @@ const Contact = () => {
           <Typography gutterBottom component='h2' variant='h2' align='center'>
             {'Fill out this form to start the conversation'}
           </Typography>
-          <form className={classes.form} noValidate onSubmit={event => handleSubmit(
+          <form className={classes.form} noValidate onSubmit={event => handleContactSubmit(
             {
               event,
               name,
