@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(8, 0, 6),
   },
   formContent: {
+    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
 }))

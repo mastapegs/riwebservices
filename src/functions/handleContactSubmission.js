@@ -12,6 +12,7 @@ const handleContactSubmit = async ({
   setMessage,
 }) => {
   event.preventDefault()
+
   const response = await fetch('/api/sendEmail', {
     method: 'POST',
     mode: 'cors',
@@ -30,10 +31,12 @@ const handleContactSubmit = async ({
       message
     })
   }).catch(error => console.log(error))
+
   if (response) {
     const data = await response.json()
     console.log(data)
   }
+  
   setName('')
   setEmail('')
   setBusinessName('')
