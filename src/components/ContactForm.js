@@ -6,6 +6,7 @@ import {
   TextField,
   InputAdornment,
   Modal,
+  Card,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FaceIcon from '@material-ui/icons/Face'
@@ -23,9 +24,17 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  modal: {
+    padding: theme.spacing(4),
+    width: '300px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  }
 }))
 
-const handleClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage) => {
+const handleFormModalClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage) => {
   setName('')
   setEmail('')
   setBusinessName('')
@@ -173,9 +182,13 @@ const ContactForm = () => {
         </form>
         <Modal
           open={open}
-          onClose={(e) => handleClose(e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage)}
+          onClose={(e) => handleFormModalClose(e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage)}
         >
-          <div><h1>Form Submitted</h1></div>
+          <Card
+            className={classes.modal}
+          >
+            {'Form Submitted'}
+          </Card>
         </Modal>
       </Container>
     </>
