@@ -9,6 +9,8 @@ import {
   Card,
   Fade,
   Backdrop,
+  CardContent,
+  CardHeader,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FaceIcon from '@material-ui/icons/Face'
@@ -27,13 +29,15 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
   modal: {
-    padding: theme.spacing(4),
-    width: '300px',
+    width: '80%',
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     outline: 0,
+  },
+  typography: {
+    marginBottom: theme.spacing(3)
   }
 }))
 
@@ -196,7 +200,22 @@ const ContactForm = () => {
             <Card
               className={classes.modal}
             >
-              {'Form Submitted'}
+              <CardHeader
+                title={`😀 Thank you for reaching out to me ${name}!`}
+              />
+              <CardContent>
+                <Typography gutterBottom className={classes.typography}>
+                  {`Your message has been emailed to me at `}
+                  <strong>mpagan@riwebservices.com</strong>
+                </Typography>
+                <Typography gutterBottom className={classes.typography}>
+                  {`📧 I'll make sure to email you back at `}
+                  <strong>{email}</strong>
+                </Typography>
+                <Typography gutterBottom className={classes.typography}>
+                  {`I look forward to our conversation together`}
+                </Typography>
+              </CardContent>
             </Card>
           </Fade>
         </Modal>
