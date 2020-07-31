@@ -7,6 +7,8 @@ import {
   InputAdornment,
   Modal,
   Card,
+  Fade,
+  Backdrop,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FaceIcon from '@material-ui/icons/Face'
@@ -31,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    outline: 0,
   }
 }))
 
@@ -183,12 +186,19 @@ const ContactForm = () => {
         <Modal
           open={open}
           onClose={(e) => handleFormModalClose(e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage)}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
         >
-          <Card
-            className={classes.modal}
-          >
-            {'Form Submitted'}
-          </Card>
+          <Fade in={open}>
+            <Card
+              className={classes.modal}
+            >
+              {'Form Submitted'}
+            </Card>
+          </Fade>
         </Modal>
       </Container>
     </>
