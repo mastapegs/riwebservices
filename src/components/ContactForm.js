@@ -41,13 +41,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const handleFormModalClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage) => {
+const handleFormModalClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage, setIsDisabled) => {
   setName('')
   setEmail('')
   setBusinessName('')
   setPhone('')
   setMessage('')
   setOpen(false)
+  setIsDisabled(false)
 }
 
 const ContactForm = () => {
@@ -58,6 +59,7 @@ const ContactForm = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [open, setOpen] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   return (
     <>
@@ -79,6 +81,7 @@ const ContactForm = () => {
             setPhone,
             setMessage,
             setOpen,
+            setIsDisabled,
           }
         )}>
           <TextField
@@ -183,13 +186,23 @@ const ContactForm = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={isDisabled}
           >
             {'Submit'}
           </Button>
         </form>
         <Modal
           open={open}
-          onClose={(e) => handleFormModalClose(e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage)}
+          onClose={(e) => handleFormModalClose(
+            e,
+            setOpen,
+            setName,
+            setBusinessName,
+            setPhone,
+            setEmail,
+            setMessage,
+            setIsDisabled
+          )}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{

@@ -11,8 +11,11 @@ const handleContactSubmit = async ({
   setPhone,
   setMessage,
   setOpen,
+  setIsDisabled,
 }) => {
   event.preventDefault()
+
+  setIsDisabled(true)
 
   const response = await fetch('/api/sendEmail', {
     method: 'POST',
