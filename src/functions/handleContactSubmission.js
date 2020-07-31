@@ -10,6 +10,7 @@ const handleContactSubmit = async ({
   setEmail,
   setPhone,
   setMessage,
+  setOpen,
 }) => {
   event.preventDefault()
 
@@ -37,11 +38,7 @@ const handleContactSubmit = async ({
     console.log(data)
   }
   
-  setName('')
-  setEmail('')
-  setBusinessName('')
-  setPhone('')
-  setMessage('')
+  setOpen(true)
 }
 
 export default handleContactSubmit

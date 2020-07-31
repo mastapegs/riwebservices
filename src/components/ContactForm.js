@@ -5,6 +5,7 @@ import {
   Typography,
   TextField,
   InputAdornment,
+  Modal,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import FaceIcon from '@material-ui/icons/Face'
@@ -24,6 +25,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const handleClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage) => {
+  setName('')
+  setEmail('')
+  setBusinessName('')
+  setPhone('')
+  setMessage('')
+  setOpen(false)
+}
+
 const ContactForm = () => {
   const classes = useStyles()
   const [name, setName] = useState('')
@@ -31,6 +41,8 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [open, setOpen] = useState(false)
+
   return (
     <>
       <Container>
@@ -50,6 +62,7 @@ const ContactForm = () => {
             setEmail,
             setPhone,
             setMessage,
+            setOpen,
           }
         )}>
           <TextField
@@ -158,6 +171,12 @@ const ContactForm = () => {
             {'Submit'}
           </Button>
         </form>
+        <Modal
+          open={open}
+          onClose={(e) => handleClose(e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage)}
+        >
+          <div><h1>Form Submitted</h1></div>
+        </Modal>
       </Container>
     </>
   )
