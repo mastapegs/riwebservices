@@ -6,9 +6,7 @@ const send = async ({
   phone,
   email,
   message,
-}) => {
-
-  return false
+}) => {WW
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
