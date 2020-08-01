@@ -89,31 +89,34 @@ const ContactForm = () => {
         <Typography gutterBottom component='h2' variant='h2' align='center'>
           {'Start the Conversation'}
         </Typography>
-        <form className={classes.form} noValidate onSubmit={event => handleContactSubmit(
-          {
-            event,
-            name,
-            businessName,
-            phone,
-            email,
-            message,
-            setName,
-            setNameError,
-            setNameHelper,
-            setBusinessName,
-            setEmail,
-            setEmailError,
-            setEmailHelper,
-            setPhone,
-            setPhoneError,
-            setPhoneHelper,
-            setMessage,
-            setMessageError,
-            setMessageHelper,
-            setOpen,
-            setIsDisabled,
-          }
-        )}>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={event => handleContactSubmit(
+            {
+              event,
+              name,
+              businessName,
+              phone,
+              email,
+              message,
+              setName,
+              setNameError,
+              setNameHelper,
+              setBusinessName,
+              setEmail,
+              setEmailError,
+              setEmailHelper,
+              setPhone,
+              setPhoneError,
+              setPhoneHelper,
+              setMessage,
+              setMessageError,
+              setMessageHelper,
+              setOpen,
+              setIsDisabled,
+            }
+          )}>
           <TextField
             variant="outlined"
             margin="normal"
