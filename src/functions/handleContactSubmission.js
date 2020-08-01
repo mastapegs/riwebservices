@@ -1,43 +1,4 @@
-const validate = ({
-  name,
-  phone,
-  email,
-  message,
-  setNameError,
-  setNameHelper,
-  setEmailError,
-  setEmailHelper,
-  setPhoneError,
-  setPhoneHelper,
-  setMessageError,
-  setMessageHelper,
-}) => {
-  let validationError = false
-  if (name === '') {
-    validationError = true
-    setNameError(true)
-    setNameHelper('A name is required')
-  }
-  if (email === '') {
-    validationError = true
-    setEmailError(true)
-    setEmailHelper('An email is required')
-  }
-  if (phone === '') {
-    validationError = true
-    setPhoneError(true)
-    setPhoneHelper('A phone number is required')
-  }
-  if (message === '') {
-    validationError = true
-    setMessageError(true)
-    setMessageHelper('A message is required')
-  }
-  if (validationError) {
-    return true
-  }
-  return false
-}
+import contactFormValidation from '../functions/contactFormValidation'
 
 const handleContactSubmit = async ({
   event,
@@ -64,7 +25,7 @@ const handleContactSubmit = async ({
 }) => {
   event.preventDefault()
 
-  let validationError = validate({
+  let validationError = contactFormValidation({
     name,
     phone,
     email,
