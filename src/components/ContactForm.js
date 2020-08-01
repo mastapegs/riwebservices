@@ -41,12 +41,37 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const handleFormModalClose = (e, setOpen, setName, setBusinessName, setPhone, setEmail, setMessage, setIsDisabled) => {
+const handleFormModalClose = ({
+  e,
+  setOpen,
+  setName,
+  setNameError,
+  setNameHelper,
+  setBusinessName,
+  setPhone,
+  setPhoneError,
+  setPhoneHelper,
+  setEmail,
+  setEmailError,
+  setEmailHelper,
+  setMessage,
+  setMessageError,
+  setMessageHelper,
+  setIsDisabled
+}) => {
   setName('')
+  setNameError(false)
+  setNameHelper('')
   setEmail('')
+  setEmailError(false)
+  setEmailHelper('')
   setBusinessName('')
   setPhone('')
+  setPhoneError(false)
+  setPhoneHelper('')
   setMessage('')
+  setMessageError(false)
+  setMessageHelper('')
   setOpen(false)
   setIsDisabled(false)
 }
@@ -54,10 +79,18 @@ const handleFormModalClose = (e, setOpen, setName, setBusinessName, setPhone, se
 const ContactForm = () => {
   const classes = useStyles()
   const [name, setName] = useState('')
+  const [nameError, setNameError] = useState(false)
+  const [nameHelper, setNameHelper] = useState('')
   const [businessName, setBusinessName] = useState('')
   const [phone, setPhone] = useState('')
+  const [phoneError, setPhoneError] = useState(false)
+  const [phoneHelper, setPhoneHelper] = useState('')
   const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState(false)
+  const [emailHelper, setEmailHelper] = useState('')
   const [message, setMessage] = useState('')
+  const [messageError, setMessageError] = useState(false)
+  const [messageHelper, setMessageHelper] = useState('')
   const [open, setOpen] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
 
@@ -76,10 +109,18 @@ const ContactForm = () => {
             email,
             message,
             setName,
+            setNameError,
+            setNameHelper,
             setBusinessName,
             setEmail,
+            setEmailError,
+            setEmailHelper,
             setPhone,
+            setPhoneError,
+            setPhoneHelper,
             setMessage,
+            setMessageError,
+            setMessageHelper,
             setOpen,
             setIsDisabled,
           }
@@ -89,6 +130,8 @@ const ContactForm = () => {
             margin="normal"
             size="small"
             required
+            error={nameError}
+            helperText={nameHelper}
             fullWidth
             id="name"
             label="Name"
@@ -126,6 +169,8 @@ const ContactForm = () => {
             margin="normal"
             size="small"
             required
+            error={phoneError}
+            helperText={phoneHelper}
             fullWidth
             id="phone"
             label="Phone Number"
@@ -145,6 +190,8 @@ const ContactForm = () => {
             margin="normal"
             size="small"
             required
+            error={emailError}
+            helperText={emailHelper}
             fullWidth
             id="email"
             label="Email Address"
@@ -164,6 +211,8 @@ const ContactForm = () => {
             margin="normal"
             size="small"
             required
+            error={messageError}
+            helperText={messageHelper}
             fullWidth
             id="message"
             label="Message"
@@ -193,16 +242,24 @@ const ContactForm = () => {
         </form>
         <Modal
           open={open}
-          onClose={(e) => handleFormModalClose(
+          onClose={(e) => handleFormModalClose({
             e,
             setOpen,
             setName,
+            setNameError,
+            setNameHelper,
             setBusinessName,
             setPhone,
+            setPhoneError,
+            setPhoneHelper,
             setEmail,
+            setEmailError,
+            setEmailHelper,
             setMessage,
-            setIsDisabled
-          )}
+            setMessageError,
+            setMessageHelper,
+            setIsDisabled,
+          })}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{
