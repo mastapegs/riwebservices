@@ -8,8 +8,6 @@ const send = async ({
   message,
 }) => {
 
-  return false
-
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
   const msg = {
