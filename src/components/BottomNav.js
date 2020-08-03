@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/core/styles'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
@@ -21,7 +22,10 @@ const useStyles = makeStyles({
 export default function SimpleBottomNavigation() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  const location = useLocation()
+  useEffect(() => {
+    console.log(location?.pathname)
+  }, [])
   return (
     <BottomNavigation
       value={value}
