@@ -36,9 +36,11 @@ export default function SimpleBottomNavigation() {
         setActiveLink(links['/'])
         break
       case '/pricing':
+      case '/pricing/':
         setActiveLink(links['pricing'])
         break
       case '/contact':
+      case '/contact/':
         setActiveLink(links['contact'])
         break
       default:
