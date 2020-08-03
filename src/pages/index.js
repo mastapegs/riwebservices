@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 import { Typography, Button, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -11,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4),
   },
 }))
+
+const handleCallToAction = (event) => {
+  navigate('/contact')
+}
 
 const Index = () => {
   const classes = useStyles()
@@ -28,8 +33,12 @@ const Index = () => {
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
               <Grid item>
-                <Button variant="contained" color="primary">
-                  Let's Talk
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={(event) => handleCallToAction(event)}
+                >
+                  {"Let's Talk"}
                 </Button>
               </Grid>
             </Grid>
