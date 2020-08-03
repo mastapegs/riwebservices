@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 import {
   Container,
   Typography,
@@ -75,7 +76,11 @@ const tiers = [
     buttonText: 'Take your business to the next level',
     buttonVariant: 'outlined',
   },
-];
+]
+
+const handlePricingLinks = event => {
+  navigate('/contact')
+}
 
 const Services = () => {
   const classes = useStyles()
@@ -131,7 +136,12 @@ const Services = () => {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                  <Button
+                    fullWidth
+                    variant={tier.buttonVariant}
+                    color="primary"
+                    onClick={(event) => handlePricingLinks(event)}
+                  >
                     {tier.buttonText}
                   </Button>
                 </CardActions>
