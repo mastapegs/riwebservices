@@ -89,10 +89,10 @@ const Services = () => {
       {/* Hero unit */}
       <Container maxWidth="sm" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Custom Web Solutions
+          {'Custom Web Solutions'}
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          A solution tailored to maximizing your business's growth potential.
+          {"A solution tailored to maximizing your business's growth potential."}
         </Typography>
       </Container>
       {/* End hero unit */}
