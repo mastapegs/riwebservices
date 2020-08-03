@@ -9,20 +9,32 @@ import {
   Card,
   Container,
   Typography,
+  Button,
 } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  links: {
+    color: 'inherit',
+    textDecoration: 'inherit'
+  }
+})
 
 const useContactData = () => ([
   {
     contactType: 'Phone',
     contactData: '401-332-7084',
+    contactScheme: 'tel'
   },
   {
     contactType: 'Email',
     contactData: 'mpagan@riwebservices.com',
+    contactScheme: 'mailto'
   },
 ])
 
 const ContactTable = () => {
+  const classes = useStyles()
   const contactData = useContactData()
   return (
     <>
@@ -40,20 +52,31 @@ const ContactTable = () => {
 
               </TableHead>
               <TableBody>
-                {contactData.map(({ contactType, contactData }) => (
-                  <TableRow key={contactType}>
-                    <TableCell>
-                      <Typography>
-                        {contactType}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {contactData}
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {contactData.map(({
+                  contactType,
+                  contactData,
+                  contactScheme
+                }) => (
+                    <TableRow key={contactType}>
+                      <TableCell>
+                        <Typography>
+                          {contactType}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography>
+                          <a
+                            className={classes.links}
+                            href={`${contactScheme}:${contactData}`}
+                          >
+                            <Button>
+                              {contactData}
+                            </Button>
+                          </a>
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
