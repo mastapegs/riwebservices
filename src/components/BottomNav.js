@@ -19,19 +19,38 @@ const useStyles = makeStyles({
   }
 });
 
+const links = {
+  '/': 0,
+  'pricing': 1,
+  'contact': 2,
+}
+
 export default function SimpleBottomNavigation() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
   const location = useLocation()
+  const [activeLink, setActiveLink] = React.useState(links[location?.pathname]);
+
   useEffect(() => {
-    console.log(location?.pathname)
-  }, [])
+    switch (location?.pathname) {
+      case '/':
+        setActiveLink(links['/'])
+        break
+      case '/pricing':
+        setActiveLink(links['pricing'])
+        break
+      case '/contact':
+        setActiveLink(links['contact'])
+        break
+      default:
+    }
+  }, [location])
+
   return (
     <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue)
-        switch (newValue) {
+      value={activeLink}
+      onChange={(event, newActiveLink) => {
+        setActiveLink(newActiveLink)
+        switch (newActiveLink) {
           case 0:
             navigate('/')
             break
