@@ -1,5 +1,6 @@
 import React from 'react'
 import { navigate } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import {
   Container,
   Typography,
@@ -86,6 +87,13 @@ const Services = () => {
   const classes = useStyles()
   return (
     <>
+      <Helmet>
+        <title>Pricing | RI Web Services</title>
+        <meta
+          name="description"
+          content="Different web services to suit different needs"
+        />
+      </Helmet>
       {/* Hero unit */}
       <Container maxWidth="sm" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>

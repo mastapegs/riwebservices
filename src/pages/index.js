@@ -1,5 +1,6 @@
 import React from 'react'
 import { navigate } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import { Typography, Button, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -21,6 +22,13 @@ const Index = () => {
   const classes = useStyles()
   return (
     <>
+      <Helmet>
+        <title>RI Web Services</title>
+        <meta
+          name="description"
+          content="Fast and affordable websites and web applications in Rhode Island"
+        />
+      </Helmet>
       {/* Hero unit */}
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
