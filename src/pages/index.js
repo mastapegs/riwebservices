@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate } from 'gatsby'
+import { navigate, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { Typography, Button, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -18,7 +18,7 @@ const handleCallToAction = (event) => {
   navigate('/contact')
 }
 
-const Index = () => {
+const Index = ({ data }) => {
   const classes = useStyles()
   return (
     <>
@@ -33,10 +33,10 @@ const Index = () => {
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            The Internet is Yours
+            {data.prismicHome.data.call_to_action.text}
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Make yourself seen and known with a beautiful and effective online web site.
+            {data.prismicHome.data.call_to_action_text.text}
           </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
@@ -58,3 +58,20 @@ const Index = () => {
 }
 
 export default Index
+
+export const query = graphql`
+query indexQuery {
+  prismicHome(uid: {eq: "index"}) {
+    id
+    data {
+      call_to_action {
+        text
+      }
+      call_to_action_text {
+        text
+      }
+    }
+  }
+}
+
+`

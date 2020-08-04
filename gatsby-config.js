@@ -22,5 +22,15 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `riwebservices`,
+        accessToken: `${process.env.PRISMIC_API_KEY}`,
+        schemas: {
+          home: require("./src/schemas/home.json"),
+        },
+      },
+    },
   ],
 }

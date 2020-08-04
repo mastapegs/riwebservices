@@ -1,0 +1,27 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "UID",
+        "placeholder": "UID"
+      }
+    },
+    "call_to_action": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Call to action title",
+        "placeholder": "Call to Action Title"
+      }
+    },
+    "call_to_action_text": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+        "label": "Call to action text",
+        "placeholder": "Call to Action Text"
+      }
+    }
+  }
+}
