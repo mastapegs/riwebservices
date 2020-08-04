@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { makeStyles } from '@material-ui/core/styles'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail';
-
-const useStyles = makeStyles({
-  links: {
-    color: 'inherit',
-    textDecoration: 'none'
-  },
-});
 
 const links = {
   '/': 0,
@@ -21,7 +13,6 @@ const links = {
 }
 
 export default function SimpleBottomNavigation() {
-  const classes = useStyles();
   const location = useLocation()
   const [activeLink, setActiveLink] = React.useState(links[location?.pathname]);
 
