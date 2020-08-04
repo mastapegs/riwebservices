@@ -21,5 +21,6 @@ module.exports = {
         icon: `src/images/favicon/favicon.png`,
       },
     },
+    'gatsby-plugin-offline',
   ],
 }
