@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     color: 'inherit',
     textDecoration: 'none'
   },
-  root: {
+  botNav: {
     position: 'fixed',
     bottom: 0,
     width: '100%'
@@ -66,7 +66,7 @@ export default function SimpleBottomNavigation() {
         }
       }}
       showLabels
-      className={classes.root}
+      className={classes.botNav}
     >
       <BottomNavigationAction label="Home" icon={<HomeIcon />} />
       <BottomNavigationAction label="Pricing" icon={<AttachMoneyIcon />} />
