@@ -29,6 +29,7 @@ module.exports = {
         accessToken: `${process.env.PRISMIC_API_KEY}`,
         schemas: {
           home: require("./src/schemas/home.json"),
+          pricing: require("./src/schemas/pricing.json"),
         },
       },
     },
