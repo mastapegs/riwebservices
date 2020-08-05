@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { navigate } from 'gatsby'
+import React from 'react'
+import { navigate, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import {
   Container,
@@ -45,9 +45,6 @@ const handlePricingLinks = event => {
 
 const Services = ({ data }) => {
   const classes = useStyles()
-  useEffect(() => {
-    console.log(data)
-  }, [])
   return (
     <>
       <Helmet>
