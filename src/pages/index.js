@@ -23,7 +23,7 @@ const Index = ({ data }) => {
   return (
     <>
       <Helmet>
-        <title>RI Web Services</title>
+        <title>Home | RI Web Services</title>
         <meta
           name="description"
           content="Fast and affordable websites and web applications in Rhode Island"
