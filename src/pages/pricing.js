@@ -60,10 +60,10 @@ const Services = ({ data }) => {
       {/* Hero unit */}
       <Container maxWidth="sm" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          {data.prismicPricing.data.page_title[0].text}
+          {data.prismicPricing.data.page_title.text}
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          {data.prismicPricing.data.page_description[0].text}
+          {data.prismicPricing.data.page_description.text}
         </Typography>
       </Container>
       {/* End hero unit */}
