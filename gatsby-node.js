@@ -1,0 +1,1 @@
+exports.createPages = require('./src/functions/createPages')

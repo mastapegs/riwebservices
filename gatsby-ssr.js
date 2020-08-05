@@ -1,3 +1,1 @@
-const pageWrapper = require('./src/components/PageWrapper').default
-
-exports.wrapPageElement = pageWrapper
+exports.wrapPageElement = require('./src/components/PageWrapper')

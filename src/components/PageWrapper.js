@@ -9,4 +9,4 @@ const pageWrapper = ({ element, props }) => {
   )
 }
 
-export default pageWrapper
+module.exports = pageWrapper
