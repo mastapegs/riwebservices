@@ -1,0 +1,27 @@
+{
+  "Main" : {
+    "uid" : {
+      "type" : "UID",
+      "config" : {
+        "label" : "Page Name",
+        "placeholder" : "Page Name (lower case)"
+      }
+    },
+    "page_title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label" : "Page Title",
+        "placeholder" : "Page title here..."
+      }
+    },
+    "page_description" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+        "label" : "Page Description",
+        "placeholder" : "Page Description Here..."
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import {
@@ -83,8 +83,11 @@ const handlePricingLinks = event => {
   navigate('/contact')
 }
 
-const Services = () => {
+const Services = ({ data }) => {
   const classes = useStyles()
+  useEffect(() => {
+    console.log(data)
+  }, [])
   return (
     <>
       <Helmet>
@@ -97,10 +100,10 @@ const Services = () => {
       {/* Hero unit */}
       <Container maxWidth="sm" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          {'Custom Web Solutions'}
+          {data.prismicPricing.data.page_title[0].text}
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          {"A solution tailored to maximizing your business's growth potential."}
+          {data.prismicPricing.data.page_description[0].text}
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -163,3 +166,19 @@ const Services = () => {
 }
 
 export default Services
+
+export const query = graphql`
+query MyQuery {
+  prismicPricing {
+    id
+    data {
+      page_description {
+        text
+      }
+      page_title {
+        text
+      }
+    }
+  }
+}
+`
