@@ -24,6 +24,7 @@ export default function SimpleBottomNavigation() {
         setActiveLink('contact')
         break
       default:
+        setActiveLink('')
     }
   }, [location])
 
