@@ -14,10 +14,13 @@ const links = {
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
-  const [activeLink, setActiveLink] = React.useState(links[location?.pathname]);
+  const [activeLink, setActiveLink] = React.useState(0);
 
   useEffect(() => {
     switch (location?.pathname) {
+      case '/':
+        setActiveLink(links['/'])
+        break
       case '/pricing':
       case '/pricing/':
         setActiveLink(links['pricing'])
@@ -27,7 +30,6 @@ export default function SimpleBottomNavigation() {
         setActiveLink(links['contact'])
         break
       default:
-        setActiveLink(links['/'])
     }
   }, [location])
 
