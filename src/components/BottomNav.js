@@ -6,28 +6,22 @@ import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 
-const links = {
-  '/': 0,
-  'pricing': 1,
-  'contact': 2,
-}
-
 export default function SimpleBottomNavigation() {
   const location = useLocation()
-  const [activeLink, setActiveLink] = React.useState(0);
+  const [activeLink, setActiveLink] = React.useState('home');
 
   useEffect(() => {
     switch (location?.pathname) {
       case '/':
-        setActiveLink(links['/'])
+        setActiveLink('home')
         break
       case '/pricing':
       case '/pricing/':
-        setActiveLink(links['pricing'])
+        setActiveLink('pricing')
         break
       case '/contact':
       case '/contact/':
-        setActiveLink(links['contact'])
+        setActiveLink('contact')
         break
       default:
     }
@@ -39,13 +33,13 @@ export default function SimpleBottomNavigation() {
       onChange={(event, newActiveLink) => {
         setActiveLink(newActiveLink)
         switch (newActiveLink) {
-          case 0:
+          case 'home':
             navigate('/')
             break
-          case 1:
+          case 'pricing':
             navigate('/pricing')
             break
-          case 2:
+          case 'contact':
             navigate('/contact')
             break
           default:
@@ -58,9 +52,9 @@ export default function SimpleBottomNavigation() {
         width: '100%',
       }}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction label="Pricing" icon={<AttachMoneyIcon />} />
-      <BottomNavigationAction label="Contact" icon={<ContactMailIcon />} />
+      <BottomNavigationAction value={'home'} label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction value={'pricing'} label="Pricing" icon={<AttachMoneyIcon />} />
+      <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
     </BottomNavigation>
   );
 }
