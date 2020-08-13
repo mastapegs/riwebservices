@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { navigate, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import {
@@ -9,7 +9,8 @@ import {
   CardHeader,
   Button,
   CardActions,
-  CardContent
+  CardContent,
+  Fade,
 } from '@material-ui/core'
 import StarIcon from '@material-ui/icons/StarBorder'
 import AddIcon from '@material-ui/icons/Add'
@@ -45,79 +46,90 @@ const handlePricingLinks = event => {
 
 const Services = ({ data }) => {
   const classes = useStyles()
+  const [fadeIn, setFadeIn] = useState(false)
+  useEffect(() => {
+    setFadeIn(true)
+    return (() => {
+      setFadeIn(false)
+    })
+  }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Pricing | RI Web Services</title>
-        <meta
-          name="description"
-          content="Different web services to suit different needs"
-        />
-      </Helmet>
-      {/* Hero unit */}
-      <Container maxWidth="sm" className={classes.heroContent}>
-        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          {data.prismicPricing.data.page_title.text}
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" component="p">
-          {data.prismicPricing.data.page_description.text}
-        </Typography>
-      </Container>
-      {/* End hero unit */}
-      <Container maxWidth="md">
-        <Grid container spacing={5} alignItems="flex-start">
-          {tiers.map((tier) => (
-            // E-Commerce card is full width at sm breakpoint
-            <Grid item key={tier.title} xs={12} sm={tier.title === 'E-Commerce Web Application' ? 12 : 6} md={4}>
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Website + Blog' ? <StarIcon /> : null}
-                  className={classes.cardHeader}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
+      <Fade in={fadeIn}>
+        <div>
+          <Helmet>
+            <title>Pricing | RI Web Services</title>
+            <meta
+              name="description"
+              content="Different web services to suit different needs"
+            />
+          </Helmet>
+          {/* Hero unit */}
+          <Container maxWidth="sm" className={classes.heroContent}>
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              {data.prismicPricing.data.page_title.text}
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" component="p">
+              {data.prismicPricing.data.page_description.text}
+            </Typography>
+          </Container>
+          {/* End hero unit */}
+          <Container maxWidth="md">
+            <Grid container spacing={5} alignItems="flex-start">
+              {tiers.map((tier) => (
+                // E-Commerce card is full width at sm breakpoint
+                <Grid item key={tier.title} xs={12} sm={tier.title === 'E-Commerce Web Application' ? 12 : 6} md={4}>
+                  <Card>
+                    <CardHeader
+                      title={tier.title}
+                      subheader={tier.subheader}
+                      titleTypographyProps={{ align: 'center' }}
+                      subheaderTypographyProps={{ align: 'center' }}
+                      action={tier.title === 'Website + Blog' ? <StarIcon /> : null}
+                      className={classes.cardHeader}
+                    />
+                    <CardContent>
+                      <div className={classes.cardPricing}>
+                        <Typography component="h2" variant="h3" color="textPrimary">
+                          ${tier.price}
+                        </Typography>
+                      </div>
+                      <div className={classes.cardPricing}>
+                        <AddIcon />
+                      </div>
+                      <div className={classes.cardPricing}>
+                        <Typography component="h2" variant="h3" color="textPrimary">
+                          ${tier.monthlyPrice}
+                        </Typography>
+                        <Typography variant="h6" color="textSecondary">
+                          /mo
                     </Typography>
-                  </div>
-                  <div className={classes.cardPricing}>
-                    <AddIcon />
-                  </div>
-                  <div className={classes.cardPricing}>
-                    <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.monthlyPrice}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      /mo
-                    </Typography>
-                  </div>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography component="li" variant="subtitle1" align="center" key={line}>
-                        {line}
-                      </Typography>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    fullWidth
-                    variant={tier.buttonVariant}
-                    color="primary"
-                    onClick={(event) => handlePricingLinks(event)}
-                  >
-                    {tier.buttonText}
-                  </Button>
-                </CardActions>
-              </Card>
+                      </div>
+                      <ul>
+                        {tier.description.map((line) => (
+                          <Typography component="li" variant="subtitle1" align="center" key={line}>
+                            {line}
+                          </Typography>
+                        ))}
+                      </ul>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        fullWidth
+                        variant={tier.buttonVariant}
+                        color="primary"
+                        onClick={(event) => handlePricingLinks(event)}
+                      >
+                        {tier.buttonText}
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Container>
+          </Container>
+        </div>
+      </Fade>
     </>
   )
 }

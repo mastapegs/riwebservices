@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles'
+import {
+  Fade,
+} from '@material-ui/core'
 import ContactTable from '../components/ContactTable'
 import ContactForm from '../components/ContactForm'
 
@@ -17,21 +20,33 @@ const useStyles = makeStyles(theme => ({
 
 const Contact = () => {
   const classes = useStyles()
+  const [fadeIn, setFadeIn] = useState(false)
+  useEffect(() => {
+    setFadeIn(true)
+    return (() => {
+      setFadeIn(false)
+    })
+  }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Contact Me | RI Web Services</title>
-        <meta
-          name="description"
-          content="Contact me and let's talk about your web presence."
-        />
-      </Helmet>
-      <div className={classes.formContent}>
-        <ContactForm />
-      </div>
-      <div className={classes.heroContent}>
-        <ContactTable />
-      </div>
+      <Fade in={fadeIn}>
+        <div>
+          <Helmet>
+            <title>Contact Me | RI Web Services</title>
+            <meta
+              name="description"
+              content="Contact me and let's talk about your web presence."
+            />
+          </Helmet>
+          <div className={classes.formContent}>
+            <ContactForm />
+          </div>
+          <div className={classes.heroContent}>
+            <ContactTable />
+          </div>
+        </div>
+      </Fade>
+
     </>
   )
 }
