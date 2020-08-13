@@ -21,6 +21,7 @@
     "gatsby-plugin-manifest": "^2.4.21",
     "gatsby-plugin-offline": "^3.2.21",
     "gatsby-plugin-react-helmet": "^3.3.10",
+    "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-source-prismic": "^3.2.1",
     "gatsby-theme-material-ui": "^1.0.13",
     "react": "^16.12.0",

@@ -6,6 +6,9 @@
 
 module.exports = {
   /* Your site config here */
+  siteMetadata: {
+    siteUrl: `https://riwebservices.com`,
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-theme-material-ui',
@@ -33,5 +36,6 @@ module.exports = {
         },
       },
     },
+    'gatsby-plugin-sitemap',
   ],
 }
