@@ -18,9 +18,6 @@ export default function SimpleBottomNavigation() {
 
   useEffect(() => {
     switch (location?.pathname) {
-      case '/':
-        setActiveLink(links['/'])
-        break
       case '/pricing':
       case '/pricing/':
         setActiveLink(links['pricing'])
@@ -30,6 +27,7 @@ export default function SimpleBottomNavigation() {
         setActiveLink(links['contact'])
         break
       default:
+        setActiveLink(links['/'])
     }
   }, [location])
 
