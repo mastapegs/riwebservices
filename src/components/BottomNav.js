@@ -8,7 +8,11 @@ import ContactMailIcon from '@material-ui/icons/ContactMail';
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
-  const [activeLink, setActiveLink] = React.useState('home')
+  const getPathname = (location) => {
+    if (location.pathname !== null) return location.pathname
+    return null
+  }
+  const [activeLink, setActiveLink] = React.useState(getPathname(location))
 
   useEffect(() => {
     switch (location?.pathname) {
