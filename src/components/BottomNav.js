@@ -14,7 +14,7 @@ const links = {
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
-  const [activeLink, setActiveLink] = React.useState(links[location?.pathname]);
+  const [activeLink, setActiveLink] = React.useState(0);
 
   useEffect(() => {
     switch (location?.pathname) {
