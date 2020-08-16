@@ -23,7 +23,6 @@ const Blog = ({ data }) => {
           </ul>
         </div>
       </Fade>
-
     </>
   )
 }
