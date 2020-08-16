@@ -4,7 +4,8 @@ import { navigate } from 'gatsby'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
-import ContactMailIcon from '@material-ui/icons/ContactMail';
+import ContactMailIcon from '@material-ui/icons/ContactMail'
+import CreateIcon from '@material-ui/icons/Create'
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
@@ -47,6 +48,9 @@ export default function SimpleBottomNavigation() {
           case 'contact':
             navigate('/contact')
             break
+          case 'blog':
+            navigate('/blog')
+            break
           default:
         }
       }}
@@ -60,6 +64,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'home'} label="Home" icon={<HomeIcon />} />
       <BottomNavigationAction value={'pricing'} label="Pricing" icon={<AttachMoneyIcon />} />
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
+      <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
     </BottomNavigation>
   );
 }
