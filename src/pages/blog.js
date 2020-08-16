@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import {
   Typography,
   Fade,
@@ -12,6 +12,10 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   blogItem: {
     padding: theme.spacing(2)
+  },
+  links: {
+    textDecoration: 'inherit',
+    color: 'inherit'
   }
 }))
 
@@ -35,9 +39,11 @@ const Blog = ({ data }) => {
             <Grid container spacing={2}>
               {data.allPrismicBlog.edges.map(edge => (
                 <Grid item key={edge.node.uid}>
-                  <Paper className={classes.blogItem}>
-                    <strong>{edge.node.data.seo_title.text}</strong> - {edge.node.data.seo_description.text}
-                  </Paper>
+                  <Link className={classes.links} to={`/blog/${edge.node.uid}`}>
+                    <Paper className={classes.blogItem}>
+                      <strong>{edge.node.data.seo_title.text}</strong> - {edge.node.data.seo_description.text}
+                    </Paper>
+                  </Link>
                 </Grid>
               ))}
             </Grid>
