@@ -7,4 +7,4 @@ const createTestPage = (createPage) => {
   })
 }
 
-export default createTestPage
+module.exports = createTestPage
