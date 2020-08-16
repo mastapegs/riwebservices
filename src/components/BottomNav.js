@@ -28,6 +28,10 @@ export default function SimpleBottomNavigation() {
       case '/contact/':
         setActiveLink('contact')
         break
+      case '/blog':
+      case '/blog/':
+        setActiveLink('blog')
+        break
       default:
         setActiveLink('')
     }
