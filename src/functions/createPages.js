@@ -1,10 +1,10 @@
 const createTestPage = require('./createTestPage')
 const createBlogPages = require('./createBlogPages')
 
-const createPages = ({ graphql, actions }) => {
+const createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  createTestPage(createPage)
-  createBlogPages({ graphql, createPage })
+  createTestPage({ createPage })
+  await createBlogPages({ graphql, createPage })
 }
 
 module.exports = createPages
