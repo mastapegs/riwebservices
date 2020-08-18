@@ -21,7 +21,7 @@ const createBlogPages = async ({ graphql, createPage }) => {
           path: `/blog/${edge.node.uid}`,
           component: path.resolve(`src/templates/blogPost.js`),
           context: {
-            id: edge.node.uid,
+            uid: edge.node.uid,
           }
         })
       })
