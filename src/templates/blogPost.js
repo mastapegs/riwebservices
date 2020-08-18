@@ -12,7 +12,9 @@ const BlogPost = () => {
   return (
     <>
       <Fade in={fadeIn}>
-        <h1>This is a blog post</h1>
+        <div>
+          <h1>This is a blog post</h1>
+        </div>
       </Fade>
     </>
   )
