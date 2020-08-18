@@ -35,15 +35,15 @@ const Index = ({ data }) => {
   }, [fadeIn])
   return (
     <>
+      <Helmet>
+        <title>Home | RI Web Services</title>
+        <meta
+          name="description"
+          content="Fast and affordable websites and web applications in Rhode Island"
+        />
+      </Helmet>
       <Fade in={fadeIn}>
         <div>
-          <Helmet>
-            <title>Home | RI Web Services</title>
-            <meta
-              name="description"
-              content="Fast and affordable websites and web applications in Rhode Island"
-            />
-          </Helmet>
           {/* Hero unit */}
           <div className={classes.heroContent}>
             <Container maxWidth="sm">

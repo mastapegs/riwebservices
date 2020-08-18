@@ -55,15 +55,15 @@ const Services = ({ data }) => {
   }, [fadeIn])
   return (
     <>
+      <Helmet>
+        <title>Pricing | RI Web Services</title>
+        <meta
+          name="description"
+          content="Different web services to suit different needs"
+        />
+      </Helmet>
       <Fade in={fadeIn}>
         <div>
-          <Helmet>
-            <title>Pricing | RI Web Services</title>
-            <meta
-              name="description"
-              content="Different web services to suit different needs"
-            />
-          </Helmet>
           {/* Hero unit */}
           <Container maxWidth="sm" className={classes.heroContent}>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>

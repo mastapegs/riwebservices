@@ -29,15 +29,15 @@ const Contact = () => {
   }, [fadeIn])
   return (
     <>
+      <Helmet>
+        <title>Contact Me | RI Web Services</title>
+        <meta
+          name="description"
+          content="Contact me and let's talk about your web presence."
+        />
+      </Helmet>
       <Fade in={fadeIn}>
         <div>
-          <Helmet>
-            <title>Contact Me | RI Web Services</title>
-            <meta
-              name="description"
-              content="Contact me and let's talk about your web presence."
-            />
-          </Helmet>
           <div className={classes.formContent}>
             <ContactForm />
           </div>
