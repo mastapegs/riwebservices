@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
-import { Fade } from '@material-ui/core'
+import { Helmet } from 'react-helmet'
+import {
+  Fade,
+  Container,
+} from '@material-ui/core'
 
 const BlogPost = ({ data, pageContext }) => {
   const [fadeIn, setFadeIn] = useState(false)
@@ -10,15 +14,21 @@ const BlogPost = ({ data, pageContext }) => {
       setFadeIn(false)
     })
   }, [fadeIn])
-  useEffect(() => {
-    console.log(data)
-  }, [data])
   return (
     <>
+      <Helmet>
+        <title>{`${data.prismicBlog.data.seo_title.text} | RI Web Services`}</title>
+        <meta
+          name="description"
+          content={data.prismicBlog.data.seo_description.text}
+        />
+      </Helmet>
       <Fade in={fadeIn}>
         <div>
-          <h1>{data.prismicBlog.data.title.text}</h1>
-          <div dangerouslySetInnerHTML={{ __html: data.prismicBlog.data.post_body.html }} />
+          <Container>
+            <h1>{data.prismicBlog.data.title.text}</h1>
+            <div dangerouslySetInnerHTML={{ __html: data.prismicBlog.data.post_body.html }} />
+          </Container>
         </div>
       </Fade>
     </>
