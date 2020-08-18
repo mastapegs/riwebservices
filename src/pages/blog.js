@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import {
   Typography,
@@ -30,6 +31,13 @@ const Blog = ({ data }) => {
   }, [fadeIn])
   return (
     <>
+      <Helmet>
+        <title>Blog | RI Web Services</title>
+        <meta
+          name="description"
+          content="A Curated Blog authored by RI Web Services"
+        />
+      </Helmet>
       <Fade in={fadeIn}>
         <div>
           <Container>
