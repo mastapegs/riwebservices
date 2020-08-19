@@ -7,9 +7,6 @@ const useStyles = makeStyles({
       width: '100%'
     }
   },
-  blogBodyText: {
-    width: '100%'
-  }
 })
 
 const SliceZone = ({ slices }) => {
@@ -21,6 +18,8 @@ const SliceZone = ({ slices }) => {
           return (
             <div dangerouslySetInnerHTML={{ __html: slice.primary.text.html }} />
           )
+        } else {
+          return null
         }
       })}
     </>
