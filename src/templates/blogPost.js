@@ -5,6 +5,7 @@ import {
   Fade,
   Container,
 } from '@material-ui/core'
+import SliceZone from '../components/SliceZone'
 
 const BlogPost = ({ data, pageContext }) => {
   const [fadeIn, setFadeIn] = useState(false)
@@ -27,7 +28,7 @@ const BlogPost = ({ data, pageContext }) => {
         <div>
           <Container>
             <h1>{data.prismicBlog.data.title.text}</h1>
-            <div dangerouslySetInnerHTML={{ __html: data.prismicBlog.data.post_body.html }} />
+            <SliceZone slices={data.prismicBlog.data.body} />
           </Container>
         </div>
       </Fade>
@@ -50,8 +51,16 @@ query BlogPostQuery($uid: String) {
       seo_description {
         text
       }
-      post_body {
-        html
+      body {
+        ... on PrismicBlogBodyText {
+          id
+          primary {
+            text {
+              html
+            }
+          }
+          slice_type
+        }
       }
     }
   }
