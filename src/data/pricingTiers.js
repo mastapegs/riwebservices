@@ -6,6 +6,7 @@ const teirs = [
     description: [
       'Multiple Pages',
       'Offline Capability',
+      'SendGrid Twilio Integration',
       'Contact Form linked to your Email and Phone',
     ],
     buttonText: 'Make yourself seen',
