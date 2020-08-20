@@ -55,13 +55,5 @@ module.exports = {
         lang: 'en'
       }
     },
-    {
-      resolve: 'gatsby-plugin-prismic-preview',
-      options: {
-        repositoryName: 'riwebservices',
-        linkResolver: require('./src/linkResolver'),
-        path: '/preview',
-      }
-    }
   ],
 }
