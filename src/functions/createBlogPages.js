@@ -2,7 +2,7 @@ const path = require('path')
 
 const createBlogPages = async ({ graphql, createPage }) => {
 
-  await graphql(`
+  const result = await graphql(`
   query BlogList {
     allPrismicBlog {
       edges {
@@ -12,21 +12,22 @@ const createBlogPages = async ({ graphql, createPage }) => {
       }
     }
   }
-  `).then(result => {
-    if (result.errors) {
-      throw result.errors
-    } else {
-      result.data.allPrismicBlog.edges.forEach(edge => {
-        createPage({
-          path: `/blog/${edge.node.uid}`,
-          component: path.resolve(`src/templates/blogPost.js`),
-          context: {
-            uid: edge.node.uid,
-          }
-        })
-      })
-    }
+  `)
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  result.data.allPrismicBlog.edges.forEach(edge => {
+    createPage({
+      path: `/blog/${edge.node.uid}`,
+      component: path.resolve(`src/templates/blogPost.js`),
+      context: {
+        uid: edge.node.uid,
+      }
+    })
   })
+
 }
 
 module.exports = createBlogPages
