@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { navigate, graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import {
   Container,
   Typography,
@@ -16,6 +15,7 @@ import StarIcon from '@material-ui/icons/StarBorder'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 import tiers from '../data/pricingTiers'
+import SEO from '../components/SEO'
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -55,13 +55,10 @@ const Services = ({ data }) => {
   }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Pricing | RI Web Services</title>
-        <meta
-          name="description"
-          content="Different web services to suit different needs"
-        />
-      </Helmet>
+      <SEO
+        title={'Pricing'}
+        description={'Different web services to suit different needs'}
+      />
       <Fade in={fadeIn}>
         <div>
           {/* Hero unit */}

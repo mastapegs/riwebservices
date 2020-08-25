@@ -11,7 +11,12 @@ require('dotenv').config({
 module.exports = {
   /* Your site config here */
   siteMetadata: {
+    title: `RI Web Services`,
+    description: `Make yourself seen and known with a beautiful and effective online website.`,
     siteUrl: `https://riwebservices.com`,
+    social: {
+      twitter: `mastapegs`,
+    },
   },
   plugins: [
     'gatsby-plugin-react-helmet',

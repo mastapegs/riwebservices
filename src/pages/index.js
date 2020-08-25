@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { navigate, graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import {
   Typography,
   Button,
@@ -9,6 +8,7 @@ import {
   Fade,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import SEO from '../components/SEO'
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -35,13 +35,10 @@ const Index = ({ data }) => {
   }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Home | RI Web Services</title>
-        <meta
-          name="description"
-          content="Fast and affordable websites and web applications in Rhode Island"
-        />
-      </Helmet>
+      <SEO
+        title={'Home'}
+        description={data.prismicHome.data.call_to_action_text.text}
+      />
       <Fade in={fadeIn}>
         <div>
           {/* Hero unit */}

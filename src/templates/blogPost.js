@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import {
   Fade,
   Container,
 } from '@material-ui/core'
 import SliceZone from '../components/SliceZone'
+import SEO from '../components/SEO'
 
 const BlogPost = ({ data, pageContext }) => {
   const [fadeIn, setFadeIn] = useState(false)
@@ -17,13 +17,10 @@ const BlogPost = ({ data, pageContext }) => {
   }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>{`${data.prismicBlog.data.seo_title.text} | RI Web Services`}</title>
-        <meta
-          name="description"
-          content={data.prismicBlog.data.seo_description.text}
-        />
-      </Helmet>
+      <SEO
+        title={data.prismicBlog.data.seo_title.text}
+        description={data.prismicBlog.data.seo_description.text}
+      />
       <Fade in={fadeIn}>
         <div>
           <Container>

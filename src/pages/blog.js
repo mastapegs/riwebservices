@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import {
   Typography,
@@ -9,6 +8,7 @@ import {
   Container,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import SEO from '../components/SEO'
 
 const useStyles = makeStyles(theme => ({
   blogItem: {
@@ -31,13 +31,10 @@ const Blog = ({ data }) => {
   }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Blog | RI Web Services</title>
-        <meta
-          name="description"
-          content="A Curated Blog authored by RI Web Services"
-        />
-      </Helmet>
+      <SEO
+        title={'Blog'}
+        description={"A Curated Blog authored by RI Web Services"}
+      />
       <Fade in={fadeIn}>
         <div>
           <Container>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Fade,
 } from '@material-ui/core'
 import ContactTable from '../components/ContactTable'
 import ContactForm from '../components/ContactForm'
+import SEO from '../components/SEO'
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -29,13 +29,10 @@ const Contact = () => {
   }, [fadeIn])
   return (
     <>
-      <Helmet>
-        <title>Contact Me | RI Web Services</title>
-        <meta
-          name="description"
-          content="Contact me and let's talk about your web presence."
-        />
-      </Helmet>
+      <SEO
+        title={'Contact Me'}
+        description={"Contact me and let's talk about your web presence."}
+      />
       <Fade in={fadeIn}>
         <div>
           <div className={classes.formContent}>
