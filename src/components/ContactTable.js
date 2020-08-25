@@ -4,21 +4,11 @@ import {
   Table,
   TableHead,
   TableBody,
-  TableRow,
-  TableCell,
   Card,
   Container,
   Typography,
-  Button,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles({
-  links: {
-    color: 'inherit',
-    textDecoration: 'inherit'
-  }
-})
+import ContactTableRow from './ContactTableRow'
 
 const useContactData = () => ([
   {
@@ -34,7 +24,6 @@ const useContactData = () => ([
 ])
 
 const ContactTable = () => {
-  const classes = useStyles()
   const contactData = useContactData()
   return (
     <>
@@ -57,25 +46,11 @@ const ContactTable = () => {
                   contactData,
                   contactScheme
                 }) => (
-                    <TableRow key={contactType}>
-                      <TableCell>
-                        <Typography>
-                          {contactType}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography>
-                          <a
-                            className={classes.links}
-                            href={`${contactScheme}:${contactData}`}
-                          >
-                            <Button>
-                              {contactData}
-                            </Button>
-                          </a>
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
+                    <ContactTableRow
+                      contactData={contactData}
+                      contactType={contactType}
+                      contactScheme={contactScheme}
+                    />
                   ))}
               </TableBody>
             </Table>
