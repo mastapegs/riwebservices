@@ -14,7 +14,10 @@ const useStyles = makeStyles(theme => ({
   gridContainer: {
     marginTop: theme.spacing(1),
     flexGrow: 1,
-  }
+  },
+  card: {
+    height: '100%'
+  },
 }))
 
 const ShopifyTest = ({ data }) => {
@@ -22,7 +25,7 @@ const ShopifyTest = ({ data }) => {
   return (
     <>
       <Container>
-        <Grid container className={classes.gridContainer} spacing={2}>
+        <Grid alignItems='stretch' container className={classes.gridContainer} spacing={2}>
           {((data) => {
             const products = data.allShopifyProduct.edges
             return (
@@ -39,7 +42,7 @@ const ShopifyTest = ({ data }) => {
                 } = node
                 return (
                   <Grid item xs={12} sm={6} md={4}>
-                    <Card key={id}>
+                    <Card className={classes.card} key={id}>
                       <CardContent>
                         <h2>{title}</h2>
                         <p>{description}</p>
