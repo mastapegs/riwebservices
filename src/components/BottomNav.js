@@ -6,6 +6,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail'
 import CreateIcon from '@material-ui/icons/Create'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
@@ -32,6 +33,10 @@ export default function SimpleBottomNavigation() {
       case '/blog/':
         setActiveLink('blog')
         break
+      case '/shopify-test':
+      case '/shopify-test/':
+        setActiveLink('shop')
+        break
       default:
         setActiveLink('')
     }
@@ -55,6 +60,9 @@ export default function SimpleBottomNavigation() {
           case 'blog':
             navigate('/blog')
             break
+          case 'shop':
+            navigate('/shopify-test')
+            break
           default:
         }
       }}
@@ -69,6 +77,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'pricing'} label="Pricing" icon={<AttachMoneyIcon />} />
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
       <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
+      <BottomNavigationAction value={'shop'} label="Shop" icon={<ShoppingCartIcon />} />
     </BottomNavigation>
   );
 }
