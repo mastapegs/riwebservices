@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import {
   Container,
@@ -7,6 +7,7 @@ import {
   CardContent,
   CardActions,
   Grid,
+  Fade,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -22,51 +23,63 @@ const useStyles = makeStyles(theme => ({
 
 const ShopifyTest = ({ data }) => {
   const classes = useStyles()
+  const [fadeIn, setFadeIn] = useState(false)
+  useEffect(() => {
+    setFadeIn(true)
+    return (() => {
+      setFadeIn(false)
+    })
+  }, [fadeIn])
   return (
     <>
-      <Container>
-        <Grid alignItems='stretch' container className={classes.gridContainer} spacing={2}>
-          {((data) => {
-            const products = data.allShopifyProduct.edges
-            return (
-              products.map(({ node }) => {
-                const {
-                  id,
-                  title,
-                  description,
-                  priceRange: {
-                    minVariantPrice: {
-                      amount: price
-                    }
-                  }
-                } = node
+      <Fade in={fadeIn}>
+        <div>
+          <Container>
+            <Grid alignItems='stretch' container className={classes.gridContainer} spacing={2}>
+              {((data) => {
+                const products = data.allShopifyProduct.edges
                 return (
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card className={classes.card} key={id}>
-                      <CardContent>
-                        <h2>{title}</h2>
-                        <p>{description}</p>
-                        <p>${parseInt(price).toFixed(2)}</p>
-                      </CardContent>
-                      <CardActions>
-                        <Button
-                          variant='contained'
-                          color='primary'
-                          onClick={() => {
-                            console.log(`Product: ${title} added to cart.`)
-                          }}
-                        >
-                          {'Add to Cart'}
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
+                  products.map(({ node }) => {
+                    const {
+                      id,
+                      title,
+                      description,
+                      priceRange: {
+                        minVariantPrice: {
+                          amount: price
+                        }
+                      }
+                    } = node
+                    return (
+                      <Grid item xs={12} sm={6} md={4}>
+                        <Card className={classes.card} key={id}>
+                          <CardContent>
+                            <h2>{title}</h2>
+                            <p>{description}</p>
+                            <p>${parseInt(price).toFixed(2)}</p>
+                          </CardContent>
+                          <CardActions>
+                            <Button
+                              variant='contained'
+                              color='primary'
+                              onClick={() => {
+                                console.log(`Product: ${title} added to cart.`)
+                              }}
+                            >
+                              {'Add to Cart'}
+                            </Button>
+                          </CardActions>
+                        </Card>
+                      </Grid>
+                    )
+                  })
                 )
-              })
-            )
-          })(data)}
-        </Grid>
-      </Container>
+              })(data)}
+            </Grid>
+          </Container>
+        </div>
+      </Fade>
+
     </>
   )
 }
