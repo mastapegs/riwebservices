@@ -11,9 +11,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
-  gridItem: {
-    margin: theme.spacing(2, 0),
-  },
   gridContainer: {
     flexGrow: 1,
   }
@@ -40,13 +37,12 @@ const ShopifyTest = ({ data }) => {
                   }
                 } = node
                 return (
-                  <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+                  <Grid item xs={12} sm={6} md={4}>
                     <Card key={id}>
                       <CardContent>
                         <h2>{title}</h2>
                         <p>{description}</p>
                         <p>${parseInt(price).toFixed(2)}</p>
-
                       </CardContent>
                       <CardActions>
                         <Button
