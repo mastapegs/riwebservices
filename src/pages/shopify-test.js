@@ -39,11 +39,9 @@ const ShopifyTest = ({ data }) => {
   const { loading, error, data: testData } = useQuery(TEST_QUERY, {
     client: shopifyClient,
   })
-  const { checkoutID, lineItems } = useContext(ShopifyContext)
+  const { checkoutID } = useContext(ShopifyContext)
   useEffect(() => {
     console.log(`CheckoutID: ${checkoutID}`)
-    console.log(`Line Items:`)
-    lineItems.forEach(line => console.log(line))
   }, [checkoutID])
   useEffect(() => {
     setFadeIn(true)
