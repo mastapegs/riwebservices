@@ -65,8 +65,8 @@ const ShopifyTest = ({ data }) => {
                       }
                     } = node
                     return (
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Card className={classes.card} key={id}>
+                      <Grid key={id} item xs={12} sm={6} md={4}>
+                        <Card className={classes.card}>
                           <CardContent>
                             <h2>{title}</h2>
                             <p>{description}</p>
