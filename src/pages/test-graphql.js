@@ -34,7 +34,7 @@ const GraphQLTest = () => {
               {console.log(data)}
               <h2>List of Continents</h2>
               <ul>
-                {data.continents.map(({ name }) => (<li>{name}</li>))}
+                {data.continents.map(({ name }) => (<li key={name}>{name}</li>))}
               </ul>
             </>
           )

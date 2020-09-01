@@ -1,6 +1,6 @@
 const React = require('react')
 const { ApolloProvider } = require('@apollo/client')
-const countriesClient = require('../clients/countiesClient')
+const countriesClient = require('../clients/countriesClient')
 
 const RootWrapper = ({ element }) => {
   return (
