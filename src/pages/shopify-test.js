@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { graphql } from 'gatsby'
 import {
   Container,
@@ -12,6 +12,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { useQuery, gql } from '@apollo/client'
 import shopifyClient from '../clients/shopifyClient'
+import ShopifyContext from '../contexts/ShopifyContext'
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -38,6 +39,12 @@ const ShopifyTest = ({ data }) => {
   const { loading, error, data: testData } = useQuery(TEST_QUERY, {
     client: shopifyClient,
   })
+  const { checkoutID, lineItems } = useContext(ShopifyContext)
+  useEffect(() => {
+    console.log(`CheckoutID: ${checkoutID}`)
+    console.log(`Line Items:`)
+    lineItems.forEach(line => console.log(line))
+  }, [checkoutID])
   useEffect(() => {
     setFadeIn(true)
     return (() => {
@@ -79,7 +86,7 @@ const ShopifyTest = ({ data }) => {
                               color='primary'
                               onClick={() => {
                                 console.log(
-                                  `Product: ${title} added to cart.\n`+
+                                  `Product: ${title} added to cart.\n` +
                                   `Variant ID: ${variants[0].id}`
                                 )
                               }}
