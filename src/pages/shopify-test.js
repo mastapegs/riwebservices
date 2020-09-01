@@ -62,7 +62,8 @@ const ShopifyTest = ({ data }) => {
                         minVariantPrice: {
                           amount: price
                         }
-                      }
+                      },
+                      variants
                     } = node
                     return (
                       <Grid key={id} item xs={12} sm={6} md={4}>
@@ -77,7 +78,10 @@ const ShopifyTest = ({ data }) => {
                               variant='contained'
                               color='primary'
                               onClick={() => {
-                                console.log(`Product: ${title} added to cart.`)
+                                console.log(
+                                  `Product: ${title} added to cart.\n`+
+                                  `Variant ID: ${variants[0].id}`
+                                )
                               }}
                             >
                               {'Add to Cart'}
@@ -130,6 +134,9 @@ export const query = graphql`
           }
         }
         id
+        variants {
+          id
+        }
       }
     }
   }
