@@ -10,11 +10,6 @@ const CREATE_CHECKOUT = gql`
         id
         webUrl
       }
-      checkoutUserErrors {
-        code
-        message
-        field
-      }
     }
   }
 `
