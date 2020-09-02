@@ -96,9 +96,17 @@ const ShopifyCheckoutInit = () => {
       // Handle Loading
     }
     if (getCheckoutError) {
+      console.log('getCheckoutError')
+      console.log(getCheckoutError.graphQLErrors)
+
+      console.log('bad checkoutID');
+      (async () => {
+        await createCheckout()
+      })()
       // Handle error
     }
     if (getCheckoutData) {
+      console.log('getCheckoutData')
       setCheckout({
         ...getCheckoutData.node
       })
