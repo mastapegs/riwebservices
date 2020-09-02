@@ -78,7 +78,6 @@ const ShopifyCheckoutInit = () => {
       // Handle Error
     }
     if (createCheckoutData) {
-      console.log('createCheckoutData')
       window.localStorage.setItem('checkoutID', createCheckoutData.checkoutCreate.checkout.id)
       setCheckout({
         ...createCheckoutData.checkoutCreate.checkout
@@ -92,9 +91,6 @@ const ShopifyCheckoutInit = () => {
       // Handle Loading
     }
     if (getCheckoutError) {
-      console.log('getCheckoutError')
-
-      console.log('bad checkoutID');
       (async () => {
         await createCheckout()
       })()
