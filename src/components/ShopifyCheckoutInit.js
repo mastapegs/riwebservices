@@ -78,6 +78,7 @@ const ShopifyCheckoutInit = () => {
       // Handle Error
     }
     if (createCheckoutData) {
+      console.log('createCheckoutData')
       window.localStorage.setItem('checkoutID', createCheckoutData.checkoutCreate.checkout.id)
       setCheckout({
         ...createCheckoutData.checkoutCreate.checkout
