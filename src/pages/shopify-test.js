@@ -36,19 +36,22 @@ const TEST_QUERY = gql`
 const ShopifyTest = ({ data }) => {
   const classes = useStyles()
   const [fadeIn, setFadeIn] = useState(false)
-  const { loading, error, data: testData } = useQuery(TEST_QUERY, {
+
+  const {
+    loading: loadingTestData,
+    error: errorTestData,
+    data: testData
+  } = useQuery(TEST_QUERY, {
     client: shopifyClient,
   })
-  const { checkoutID } = useContext(ShopifyContext)
-  useEffect(() => {
-    console.log(`CheckoutID: ${checkoutID}`)
-  }, [checkoutID])
+
   useEffect(() => {
     setFadeIn(true)
     return (() => {
       setFadeIn(false)
     })
   }, [fadeIn])
+
   return (
     <>
       <Fade in={fadeIn}>
@@ -102,21 +105,23 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </div>
       </Fade>
-      {(() => {
-        if (loading) return <p>Loading...</p>
-        if (error) return (
-          <>
-            {console.log(JSON.stringify(error))}
-            <p>Error...</p>
-          </>
-        )
-        return (
-          <>
-            <p>Shopify Pull Successful</p>
-            {console.log(testData)}
-          </>
-        )
-      })()}
+      <Container>
+        {(() => {
+          if (loadingTestData) return <p>Loading...</p>
+          if (errorTestData) return (
+            <>
+              {console.log(JSON.stringify(errorTestData))}
+              <p>Error...</p>
+            </>
+          )
+          return (
+            <>
+              <p>Shopify Pull Successful</p>
+              {console.log(testData)}
+            </>
+          )
+        })()}
+      </Container>
     </>
   )
 }
