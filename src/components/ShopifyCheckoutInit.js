@@ -33,8 +33,16 @@ const GET_CHECKOUT = gql`
 
 const ShopifyCheckoutInit = () => {
   const { checkout, setCheckout } = useContext(ShopifyContext)
-  const [getCheckout, { loading: getCheckoutLoading, data: getCheckoutData, error: getCheckoutError }] = useLazyQuery(GET_CHECKOUT, { errorPolicy: 'all' })
-  const [createCheckout, { data: createCheckoutData }] = useMutation(CREATE_CHECKOUT, {
+  const [getCheckout, {
+    loading: getCheckoutLoading,
+    data: getCheckoutData,
+    error: getCheckoutError
+  }] = useLazyQuery(GET_CHECKOUT, { errorPolicy: 'all' })
+  const [createCheckout, {
+    loading: createCheckoutLoading,
+    data: createCheckoutData,
+    error: createCheckoutError,
+  }] = useMutation(CREATE_CHECKOUT, {
     client: shopifyClient
   })
 
@@ -46,15 +54,7 @@ const ShopifyCheckoutInit = () => {
       // localStorage checkoutID is null
       // create a new checkout using createCheckout mutation
       (async () => {
-        const { data: { checkoutCreate: { checkout: checkoutData } } } = await createCheckout()
-        console.log(checkoutData)
-        window.localStorage.setItem('checkoutID', checkoutData.id)
-        setCheckout((prevState) => {
-          return {
-            ...prevState,
-            ...checkoutData
-          }
-        })
+        await createCheckout()
       })()
     } else {
       // localStorage checkoutID has a value
@@ -71,6 +71,21 @@ const ShopifyCheckoutInit = () => {
       })()
     }
   }, [])
+
+  useEffect(() => {
+    if (createCheckoutLoading) {
+      console.log('createCheckoutLoading')
+      console.log(createCheckoutLoading)
+    }
+    if (createCheckoutError) {
+      console.log('createCheckoutError')
+      console.log(createCheckoutError)
+    }
+    if (createCheckoutData) {
+      console.log('createCheckoutData')
+      console.log(createCheckoutData)
+    }
+  }, [createCheckoutLoading, createCheckoutData, createCheckoutError])
 
   useEffect(() => {
     if (getCheckoutLoading) {
