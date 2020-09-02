@@ -72,7 +72,7 @@ const ShopifyCheckoutInit = () => {
         })
       })()
     }
-  }, [])
+  }, [createCheckout, getCheckout])
 
   // createCheckout mutation effect
   useEffect(() => {
@@ -97,7 +97,6 @@ const ShopifyCheckoutInit = () => {
     }
     if (getCheckoutError) {
       console.log('getCheckoutError')
-      console.log(getCheckoutError.graphQLErrors)
 
       console.log('bad checkoutID');
       (async () => {
