@@ -10,9 +10,6 @@ import {
   Fade,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { useQuery, gql } from '@apollo/client'
-import shopifyClient from '../clients/shopifyClient'
-import ShopifyContext from '../contexts/ShopifyContext'
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -24,26 +21,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const TEST_QUERY = gql`
-  query TestQuery {
-    shop {
-      description
-      name
-    }
-  }
-`
-
 const ShopifyTest = ({ data }) => {
   const classes = useStyles()
   const [fadeIn, setFadeIn] = useState(false)
-
-  const {
-    loading: loadingTestData,
-    error: errorTestData,
-    data: testData
-  } = useQuery(TEST_QUERY, {
-    client: shopifyClient,
-  })
 
   useEffect(() => {
     setFadeIn(true)
@@ -105,23 +85,6 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </div>
       </Fade>
-      <Container>
-        {(() => {
-          if (loadingTestData) return <p>Loading...</p>
-          if (errorTestData) return (
-            <>
-              {console.log(JSON.stringify(errorTestData))}
-              <p>Error...</p>
-            </>
-          )
-          return (
-            <>
-              <p>Shopify Pull Successful</p>
-              {console.log(testData)}
-            </>
-          )
-        })()}
-      </Container>
     </>
   )
 }
