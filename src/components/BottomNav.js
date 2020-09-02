@@ -33,8 +33,8 @@ export default function SimpleBottomNavigation() {
       case '/blog/':
         setActiveLink('blog')
         break
-      case '/shopify-test':
-      case '/shopify-test/':
+      case '/shop':
+      case '/shop/':
         setActiveLink('shop')
         break
       default:
@@ -61,7 +61,7 @@ export default function SimpleBottomNavigation() {
             navigate('/blog')
             break
           case 'shop':
-            navigate('/shopify-test')
+            navigate('/shop')
             break
           default:
         }
