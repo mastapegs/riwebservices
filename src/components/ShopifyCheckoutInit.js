@@ -37,13 +37,17 @@ const ShopifyCheckoutInit = () => {
     loading: getCheckoutLoading,
     data: getCheckoutData,
     error: getCheckoutError
-  }] = useLazyQuery(GET_CHECKOUT, { errorPolicy: 'all' })
+  }] = useLazyQuery(GET_CHECKOUT, {
+    client: shopifyClient,
+    errorPolicy: 'all',
+  })
   const [createCheckout, {
     loading: createCheckoutLoading,
     data: createCheckoutData,
     error: createCheckoutError,
   }] = useMutation(CREATE_CHECKOUT, {
-    client: shopifyClient
+    client: shopifyClient,
+    errorPolicy: 'all',
   })
 
   useEffect(() => {
@@ -72,21 +76,23 @@ const ShopifyCheckoutInit = () => {
     }
   }, [])
 
+  // createCheckout mutation effect
   useEffect(() => {
     if (createCheckoutLoading) {
-      console.log('createCheckoutLoading')
-      console.log(createCheckoutLoading)
+      // Loading
     }
     if (createCheckoutError) {
-      console.log('createCheckoutError')
-      console.log(createCheckoutError)
+      // Handle Error
     }
     if (createCheckoutData) {
-      console.log('createCheckoutData')
-      console.log(createCheckoutData)
+      window.localStorage.setItem('checkoutID', createCheckoutData.checkoutCreate.checkout.id)
+      setCheckout({
+        ...createCheckoutData.checkoutCreate.checkout
+      })
     }
   }, [createCheckoutLoading, createCheckoutData, createCheckoutError])
 
+  // getCheckout query effect
   useEffect(() => {
     if (getCheckoutLoading) {
       console.log('getCheckoutLoading')
@@ -103,6 +109,12 @@ const ShopifyCheckoutInit = () => {
       console.log(getCheckoutData)
     }
   }, [getCheckoutLoading, getCheckoutData, getCheckoutError])
+
+  // setCheckout effect
+  useEffect(() => {
+    console.log('Checkout:')
+    console.log(checkout)
+  }, [checkout])
 
   return (
     <>
