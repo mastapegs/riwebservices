@@ -64,8 +64,6 @@ const ShopifyCheckoutInit = () => {
       // localStorage checkoutID has a value
       // verify checkoutID for validity using checkout mutation
       // if good ID, setCheckout state, else create new checkout, then set state
-      console.log('inside else statement');
-      console.log(localCheckoutID);
       (async () => {
         await getCheckout({
           variables: {
@@ -95,18 +93,15 @@ const ShopifyCheckoutInit = () => {
   // getCheckout query effect
   useEffect(() => {
     if (getCheckoutLoading) {
-      console.log('getCheckoutLoading')
-      console.log(getCheckoutLoading)
+      // Handle Loading
     }
     if (getCheckoutError) {
-      console.log('getCheckoutError')
-      console.log(getCheckoutError)
-      console.log(getCheckoutError.graphQLErrors)
-      console.log(getCheckoutError.networkError)
+      // Handle error
     }
     if (getCheckoutData) {
-      console.log('getCheckoutData')
-      console.log(getCheckoutData)
+      setCheckout({
+        ...getCheckoutData.node
+      })
     }
   }, [getCheckoutLoading, getCheckoutData, getCheckoutError])
 
