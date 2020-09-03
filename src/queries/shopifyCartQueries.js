@@ -4,6 +4,7 @@ const CHECKOUT_FRAGMENT = gql`
   fragment CheckoutFragment on Checkout {
     id
     webUrl
+    orderStatusUrl
     lineItems(first: 100) {
       edges {
         node {

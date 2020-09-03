@@ -161,8 +161,7 @@ const ShopifyTest = ({ data }) => {
               color='primary'
               variant='contained'
               onClick={() => {
-                let child = window.open(checkout.webUrl)
-                
+                const shopifyCheckout = window.open(checkout.webUrl)
               }}
             >
               {'Checkout'}
