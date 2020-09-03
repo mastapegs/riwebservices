@@ -9,6 +9,15 @@ const CREATE_CHECKOUT = gql`
       checkout {
         id
         webUrl
+        lineItems(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              title
+            }
+          }
+        }
       }
     }
   }
@@ -21,6 +30,15 @@ const GET_CHECKOUT = gql`
       ... on Checkout {
         id
         webUrl
+        lineItems(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              title
+            }
+          }
+        }
       }
     }
   }

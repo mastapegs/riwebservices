@@ -10,6 +10,28 @@ import {
   Fade,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { gql, useMutation } from '@apollo/client'
+import shopifyClient from '../clients/shopifyClient'
+
+const ADD_LINE = gql`
+  mutation ($id: ID!, $variantID: ID!, $quantity: Int!) {
+    checkoutLineItemsAdd(checkoutId: $id, lineItems: {quantity: $quantity, variantId: $variantID}) {
+      checkout {
+        id
+        webUrl
+        lineItems(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -24,13 +46,26 @@ const useStyles = makeStyles(theme => ({
 const ShopifyTest = ({ data }) => {
   const classes = useStyles()
   const [fadeIn, setFadeIn] = useState(false)
+  const [addLine, {
+    loading: addLineLoading,
+    error: addLineError,
+    data: addLineData,
+  }] = useMutation(ADD_LINE, {
+    client: shopifyClient,
+  })
 
+  // Modal useEffect
   useEffect(() => {
     setFadeIn(true)
     return (() => {
       setFadeIn(false)
     })
   }, [fadeIn])
+
+  // addLine mutation useEffect
+  useEffect(() => {
+
+  }, [addLineLoading, addLineError, addLineData])
 
   return (
     <>
@@ -43,23 +78,18 @@ const ShopifyTest = ({ data }) => {
                 return (
                   products.map(({ node }) => {
                     const {
-                      id,
+                      shopifyId,
                       title,
                       description,
-                      priceRange: {
-                        minVariantPrice: {
-                          amount: price
-                        }
-                      },
                       variants
                     } = node
                     return (
-                      <Grid key={id} item xs={12} sm={6} md={4}>
+                      <Grid key={shopifyId} item xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                           <CardContent>
                             <h2>{title}</h2>
                             <p>{description}</p>
-                            <p>${parseInt(price).toFixed(2)}</p>
+                            <p>${parseInt(variants[0].price).toFixed(2)}</p>
                           </CardContent>
                           <CardActions>
                             <Button
@@ -68,7 +98,7 @@ const ShopifyTest = ({ data }) => {
                               onClick={() => {
                                 console.log(
                                   `Product: ${title} added to cart.\n` +
-                                  `Variant ID: ${variants[0].id}`
+                                  `Variant ID: ${variants[0].shopifyId}`
                                 )
                               }}
                             >
@@ -98,17 +128,10 @@ export const query = graphql`
       node {
         title
         description
-        priceRange {
-          minVariantPrice {
-            amount
-          }
-          maxVariantPrice {
-            amount
-          }
-        }
-        id
+        shopifyId
         variants {
-          id
+          shopifyId
+          price
         }
       }
     }
