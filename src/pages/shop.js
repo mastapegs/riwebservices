@@ -14,46 +14,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { gql, useMutation } from '@apollo/client'
 import shopifyClient from '../clients/shopifyClient'
 import ShopifyContext from '../contexts/ShopifyContext'
-
-const ADD_LINE = gql`
-  mutation ($id: ID!, $variantID: ID!, $quantity: Int!) {
-    checkoutLineItemsAdd(checkoutId: $id, lineItems: {quantity: $quantity, variantId: $variantID}) {
-      checkout {
-        id
-        webUrl
-        lineItems(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const EMPTY_CART = gql`
-  mutation ($id: ID!) {
-    checkoutLineItemsReplace(checkoutId: $id, lineItems: []) {
-      checkout {
-        id
-        webUrl
-        lineItems(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import {
+  ADD_LINE,
+  EMPTY_CART,
+} from '../queries/shopifyCartQueries'
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {

@@ -1,48 +1,11 @@
 import React, { useEffect, useContext } from 'react'
 import ShopifyContext from '../contexts/ShopifyContext'
 import shopifyClient from '../clients/shopifyClient'
-import { gql, useLazyQuery, useMutation } from '@apollo/client'
-
-const CREATE_CHECKOUT = gql`
-  mutation CreateCheckout {
-    checkoutCreate(input: {}) {
-      checkout {
-        id
-        webUrl
-        lineItems(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const GET_CHECKOUT = gql`
-  query($id: ID!) {
-    node(id: $id) {
-      id
-      ... on Checkout {
-        id
-        webUrl
-        lineItems(first: 100) {
-          edges {
-            node {
-              id
-              quantity
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import { useLazyQuery, useMutation } from '@apollo/client'
+import {
+  CREATE_CHECKOUT,
+  GET_CHECKOUT,
+} from '../queries/shopifyCartQueries'
 
 const ShopifyCheckoutInit = () => {
   const { checkout, setCheckout } = useContext(ShopifyContext)
