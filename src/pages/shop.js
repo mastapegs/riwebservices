@@ -8,6 +8,7 @@ import {
   CardActions,
   Grid,
   Fade,
+  Paper,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { gql, useMutation } from '@apollo/client'
@@ -17,6 +18,26 @@ import ShopifyContext from '../contexts/ShopifyContext'
 const ADD_LINE = gql`
   mutation ($id: ID!, $variantID: ID!, $quantity: Int!) {
     checkoutLineItemsAdd(checkoutId: $id, lineItems: {quantity: $quantity, variantId: $variantID}) {
+      checkout {
+        id
+        webUrl
+        lineItems(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const EMPTY_CART = gql`
+  mutation ($id: ID!) {
+    checkoutLineItemsReplace(checkoutId: $id, lineItems: []) {
       checkout {
         id
         webUrl
@@ -59,6 +80,14 @@ const ShopifyTest = ({ data }) => {
     client: shopifyClient,
   })
 
+  const [emptyCart, {
+    loading: emptyCartLoading,
+    error: emptyCartError,
+    data: emptyCartData,
+  }] = useMutation(EMPTY_CART, {
+    client: shopifyClient
+  })
+
   const { checkout, setCheckout } = useContext(ShopifyContext)
 
   // Modal useEffect
@@ -85,6 +114,18 @@ const ShopifyTest = ({ data }) => {
       })
     }
   }, [addLineLoading, addLineError, addLineData])
+
+  // emptyCart mutation useEffect
+  useEffect(() => {
+    if (emptyCartLoading) console.log('emptyCartLoading')
+    if (emptyCartError) console.log('emptyCartError')
+    if (emptyCartData) {
+      console.log(emptyCartData)
+      setCheckout({
+        ...emptyCartData.checkoutLineItemsReplace.checkout
+      })
+    }
+  }, [emptyCartLoading, emptyCartError, empty])
 
   return (
     <>
@@ -145,15 +186,36 @@ const ShopifyTest = ({ data }) => {
       </Fade>
       <Container>
         <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
-        <Button
-          color='primary'
-          variant='contained'
-          onClick={() => {
-            window.open(checkout.webUrl)
-          }}
-        >
-          {'Checkout'}
-        </Button>
+        <Paper>
+          <Container>
+            <p>This checkout button leads to Shopify's Test Payment Gateway</p>
+            <Button
+              color='primary'
+              variant='contained'
+              onClick={() => {
+                window.open(checkout.webUrl)
+              }}
+            >
+              {'Checkout'}
+            </Button>
+            <Button
+              color='secondary'
+              variant='contained'
+              onClick={() => {
+                (async () => {
+                  await emptyCart({
+                    variables: {
+                      id: checkout.id
+                    }
+                  })
+                  return
+                })()
+              }}
+            >
+              {'Empty Cart'}
+            </Button>
+          </Container>
+        </Paper>
       </Container>
     </>
   )

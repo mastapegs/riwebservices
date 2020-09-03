@@ -85,7 +85,7 @@ const ShopifyCheckoutInit = () => {
         })
       })()
     }
-  }, [createCheckout, getCheckout])
+  }, [])
 
   // createCheckout mutation effect
   useEffect(() => {
@@ -105,8 +105,10 @@ const ShopifyCheckoutInit = () => {
 
   // getCheckout query effect
   useEffect(() => {
+    console.log('inside getCheckout')
     if (getCheckoutLoading) {
       // Handle Loading
+      console.log('getCheckoutLoading')
     }
     if (getCheckoutError) {
       (async () => {
