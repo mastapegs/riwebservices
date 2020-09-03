@@ -125,7 +125,7 @@ const ShopifyTest = ({ data }) => {
         ...emptyCartData.checkoutLineItemsReplace.checkout
       })
     }
-  }, [emptyCartLoading, emptyCartError, empty])
+  }, [emptyCartLoading, emptyCartError, emptyCartData])
 
   return (
     <>
