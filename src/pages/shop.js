@@ -11,7 +11,7 @@ import {
   Paper,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import shopifyClient from '../clients/shopifyClient'
 import ShopifyContext from '../contexts/ShopifyContext'
 import {
