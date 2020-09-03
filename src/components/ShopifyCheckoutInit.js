@@ -12,6 +12,8 @@ const ShopifyCheckoutInit = () => {
     setCheckout,
     checkCheckoutComplete,
     setCheckCheckoutComplete,
+    checkCheckoutTimer,
+    setCheckCheckoutTimer,
   } = useContext(ShopifyContext)
 
   const [getCheckout, {
@@ -88,9 +90,15 @@ const ShopifyCheckoutInit = () => {
     }
     if (getCheckoutData) {
       console.log('getCheckoutData')
-      setCheckout({
-        ...getCheckoutData.node
-      })
+      if (getCheckoutData.node.orderStatusUrl === null) {
+        setCheckout({
+          ...getCheckoutData.node
+        })
+      } else {
+        (async () => {
+          await createCheckout()
+        })()
+      }
     }
   }, [getCheckoutLoading, getCheckoutData, getCheckoutError])
 
@@ -103,7 +111,14 @@ const ShopifyCheckoutInit = () => {
   //
   useEffect(() => {
     if (checkCheckoutComplete) {
-      console.log('need to check if checkout is complete')
+      console.log('checkout is visited, running checkout check!')
+      if (checkout.orderStatusUrl !== null) {
+        console.log('checkout is complete! get new checkout!')
+      }
+
+      clearInterval(checkCheckoutTimer)
+      setCheckCheckoutTimer(null)
+      setCheckCheckoutComplete(false)
     }
   }, [checkCheckoutComplete])
 

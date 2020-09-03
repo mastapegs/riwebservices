@@ -52,7 +52,14 @@ const ShopifyTest = ({ data }) => {
     client: shopifyClient
   })
 
-  const { checkout, setCheckout } = useContext(ShopifyContext)
+  const {
+    checkout,
+    setCheckout,
+    checkCheckoutComplete,
+    setCheckCheckoutComplete,
+    checkCheckoutTimer,
+    setCheckCheckoutTimer
+  } = useContext(ShopifyContext)
 
   // Modal useEffect
   useEffect(() => {
@@ -152,6 +159,8 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </div>
       </Fade>
+
+      {/* Shopping Cart Data for testing visibility */}
       <Container>
         <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
         <Paper>
@@ -162,6 +171,9 @@ const ShopifyTest = ({ data }) => {
               variant='contained'
               onClick={() => {
                 const shopifyCheckout = window.open(checkout.webUrl)
+                setCheckCheckoutTimer(
+                  setInterval(() => { setCheckCheckoutComplete(true) }, 1000)
+                )
               }}
             >
               {'Checkout'}
@@ -185,6 +197,7 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </Paper>
       </Container>
+
     </>
   )
 }
