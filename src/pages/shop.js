@@ -145,6 +145,15 @@ const ShopifyTest = ({ data }) => {
       </Fade>
       <Container>
         <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
+        <Button
+          color='primary'
+          variant='contained'
+          onClick={() => {
+            window.open(checkout.webUrl)
+          }}
+        >
+          {'Checkout'}
+        </Button>
       </Container>
     </>
   )
