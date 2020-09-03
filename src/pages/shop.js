@@ -140,6 +140,9 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </div>
       </Fade>
+      <Container>
+        <pre>{JSON.stringify(checkout, null, 2)}</pre>
+      </Container>
     </>
   )
 }
