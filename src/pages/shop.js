@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { graphql } from 'gatsby'
 import {
   Container,
@@ -12,6 +12,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles'
 import { gql, useMutation } from '@apollo/client'
 import shopifyClient from '../clients/shopifyClient'
+import ShopifyContext from '../contexts/ShopifyContext'
 
 const ADD_LINE = gql`
   mutation ($id: ID!, $variantID: ID!, $quantity: Int!) {
@@ -46,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 const ShopifyTest = ({ data }) => {
   const classes = useStyles()
   const [fadeIn, setFadeIn] = useState(false)
+
   const [addLine, {
     loading: addLineLoading,
     error: addLineError,
@@ -53,6 +55,8 @@ const ShopifyTest = ({ data }) => {
   }] = useMutation(ADD_LINE, {
     client: shopifyClient,
   })
+
+  const { checkout, setCheckout } = useContext(ShopifyContext)
 
   // Modal useEffect
   useEffect(() => {
@@ -64,7 +68,19 @@ const ShopifyTest = ({ data }) => {
 
   // addLine mutation useEffect
   useEffect(() => {
-
+    if (addLineLoading) {
+      console.log('addLineLoading')
+    }
+    if (addLineError) {
+      console.log('addLineError')
+    }
+    if (addLineData) {
+      console.log('addLineData')
+      console.log(addLineData)
+      setCheckout({
+        ...addLineData.checkoutLineItemsAdd.checkout
+      })
+    }
   }, [addLineLoading, addLineError, addLineData])
 
   return (
@@ -99,7 +115,16 @@ const ShopifyTest = ({ data }) => {
                                 console.log(
                                   `Product: ${title} added to cart.\n` +
                                   `Variant ID: ${variants[0].shopifyId}`
-                                )
+                                );
+                                (async () => {
+                                  await addLine({
+                                    variables: {
+                                      id: checkout.id,
+                                      variantID: variants[0].shopifyId,
+                                      quantity: 1,
+                                    }
+                                  })
+                                })()
                               }}
                             >
                               {'Add to Cart'}
