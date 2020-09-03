@@ -82,7 +82,11 @@ const ShopifyTest = ({ data }) => {
   // emptyCart mutation useEffect
   useEffect(() => {
     if (emptyCartLoading) console.log('emptyCartLoading')
-    if (emptyCartError) console.log('emptyCartError')
+    if (emptyCartError) {
+      // Checkout already completed
+      console.log('emptyCartError')
+      console.log(emptyCartError)
+    }
     if (emptyCartData) {
       console.log(emptyCartData)
       setCheckout({
@@ -157,7 +161,8 @@ const ShopifyTest = ({ data }) => {
               color='primary'
               variant='contained'
               onClick={() => {
-                window.open(checkout.webUrl)
+                let child = window.open(checkout.webUrl)
+                
               }}
             >
               {'Checkout'}

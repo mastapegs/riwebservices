@@ -8,7 +8,12 @@ import {
 } from '../queries/shopifyCartQueries'
 
 const ShopifyCheckoutInit = () => {
-  const { checkout, setCheckout } = useContext(ShopifyContext)
+  const { checkout,
+    setCheckout,
+    checkCheckoutComplete,
+    setCheckCheckoutComplete,
+  } = useContext(ShopifyContext)
+
   const [getCheckout, {
     loading: getCheckoutLoading,
     data: getCheckoutData,
@@ -17,6 +22,7 @@ const ShopifyCheckoutInit = () => {
     client: shopifyClient,
     errorPolicy: 'all',
   })
+
   const [createCheckout, {
     loading: createCheckoutLoading,
     data: createCheckoutData,
@@ -26,6 +32,7 @@ const ShopifyCheckoutInit = () => {
     errorPolicy: 'all',
   })
 
+  // Main triggering onload useEffect
   useEffect(() => {
     // Get the localStorage checkoutID
     // ID will either be null, or have a checkout.id value
@@ -92,6 +99,13 @@ const ShopifyCheckoutInit = () => {
     console.log('Checkout:')
     console.log(checkout)
   }, [checkout])
+
+  //
+  useEffect(() => {
+    if (checkCheckoutComplete) {
+      console.log('need to check if checkout is complete')
+    }
+  }, [checkCheckoutComplete])
 
   return (
     <>

@@ -3,6 +3,7 @@ import ShopifyContext from '../contexts/ShopifyContext'
 
 const ShopifyContextProvider = ({ children }) => {
   const [checkout, setCheckout] = useState(null)
+  const [checkCheckoutComplete, setCheckCheckoutComplete] = useState(false)
 
   return (
     <>
