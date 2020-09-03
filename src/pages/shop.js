@@ -42,6 +42,9 @@ const useStyles = makeStyles(theme => ({
   card: {
     height: '100%'
   },
+  checkoutData: {
+    overflow: 'scroll'
+  }
 }))
 
 const ShopifyTest = ({ data }) => {
@@ -141,7 +144,7 @@ const ShopifyTest = ({ data }) => {
         </div>
       </Fade>
       <Container>
-        <pre>{JSON.stringify(checkout, null, 2)}</pre>
+        <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
       </Container>
     </>
   )
