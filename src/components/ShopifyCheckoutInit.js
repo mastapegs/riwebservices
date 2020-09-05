@@ -58,13 +58,11 @@ const ShopifyCheckoutInit = () => {
       // localStorage checkoutID has a value
       // verify checkoutID for validity using checkout mutation
       // if good ID, setCheckout state, else create new checkout, then set state
-      (async () => {
-        await getCheckout({
-          variables: {
-            id: localCheckoutID
-          }
-        })
-      })()
+      getCheckout({
+        variables: {
+          id: localCheckoutID
+        }
+      })
     }
   }, [])
 
