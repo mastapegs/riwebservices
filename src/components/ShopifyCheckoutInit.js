@@ -5,6 +5,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import {
   CREATE_CHECKOUT,
   GET_CHECKOUT,
+  CHECK_ORDER_STATUS,
 } from '../queries/shopifyCartQueries'
 
 const ShopifyCheckoutInit = () => {
@@ -23,6 +24,14 @@ const ShopifyCheckoutInit = () => {
   }] = useLazyQuery(GET_CHECKOUT, {
     client: shopifyClient,
     errorPolicy: 'all',
+  })
+
+  const [getOrderStatus, {
+    loading: getOrderStatusLoading,
+    error: getOrderStatusError,
+    data: getOrderStatusData,
+  }] = useLazyQuery(CHECK_ORDER_STATUS, {
+    client: shopifyClient
   })
 
   const [createCheckout, {
@@ -102,6 +111,13 @@ const ShopifyCheckoutInit = () => {
     }
   }, [getCheckoutLoading, getCheckoutData, getCheckoutError])
 
+  // getOrderStatus effect
+  useEffect(() => {
+    if (getOrderStatusLoading) console.log('getOrderStatusLoading')
+    if (getOrderStatusError) console.log('getOrderStatusError')
+    if (getOrderStatusData) console.log(getOrderStatusData)
+  }, [getOrderStatusLoading, getOrderStatusError, getOrderStatusData])
+
   // setCheckout effect
   useEffect(() => {
     console.log('Checkout:')
@@ -110,16 +126,19 @@ const ShopifyCheckoutInit = () => {
 
   //
   useEffect(() => {
-    if (checkCheckoutComplete) {
-      console.log('checkout is visited, running checkout check!')
-      if (checkout.orderStatusUrl !== null) {
-        console.log('checkout is complete! get new checkout!')
-      }
+    (async () => {
+      if (checkCheckoutComplete) {
+        console.log('checkout is visited, running checkout check!')
+        await getOrderStatus({ variables: { id: checkout.id } })
+        if (checkout.orderStatusUrl !== null) {
+          console.log('checkout is complete! get new checkout!')
+        }
 
-      clearInterval(checkCheckoutTimer)
-      setCheckCheckoutTimer(null)
+        // clearInterval(checkCheckoutTimer)
+        // setCheckCheckoutTimer(null)
+      }
       setCheckCheckoutComplete(false)
-    }
+    })()
   }, [checkCheckoutComplete])
 
   return (

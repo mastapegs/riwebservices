@@ -61,3 +61,14 @@ export const EMPTY_CART = gql`
   }
   ${CHECKOUT_FRAGMENT}
 `
+
+export const CHECK_ORDER_STATUS = gql`
+  query ($id: ID!) {
+    node(id: $id) {
+      ... on Checkout {
+        orderStatusUrl
+        id
+      }
+    }
+  }
+`
