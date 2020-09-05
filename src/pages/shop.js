@@ -29,6 +29,12 @@ const useStyles = makeStyles(theme => ({
   },
   checkoutData: {
     overflow: 'scroll'
+  },
+  checkoutPaper: {
+    padding: theme.spacing(1, 0)
+  },
+  checkoutButton: {
+    marginRight: theme.spacing(1)
   }
 }))
 
@@ -159,13 +165,14 @@ const ShopifyTest = ({ data }) => {
       {/* Shopping Cart Data for testing visibility */}
       <Container>
         <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
-        <Paper>
+        <Paper className={classes.checkoutPaper}>
           <Container>
             <p>This checkout button leads to Shopify's Test Payment Gateway</p>
             <Button
               color='primary'
               variant='contained'
               onClick={() => window.open(checkout.webUrl)}
+              className={classes.checkoutButton}
             >
               {'Checkout'}
             </Button>
