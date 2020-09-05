@@ -172,7 +172,7 @@ const ShopifyTest = ({ data }) => {
               onClick={() => {
                 window.open(checkout.webUrl)
                 setCheckCheckoutTimer(
-                  setInterval(() => { setCheckCheckoutComplete(true) }, 1000)
+                  setInterval(() => setCheckCheckoutComplete(true), 3000)
                 )
               }}
             >

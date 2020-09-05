@@ -115,7 +115,9 @@ const ShopifyCheckoutInit = () => {
   useEffect(() => {
     if (getOrderStatusLoading) console.log('getOrderStatusLoading')
     if (getOrderStatusError) console.log('getOrderStatusError')
-    if (getOrderStatusData) console.log(getOrderStatusData)
+    if (getOrderStatusData) {
+      console.log(getOrderStatusData)
+    }
   }, [getOrderStatusLoading, getOrderStatusError, getOrderStatusData])
 
   // setCheckout effect
@@ -126,19 +128,14 @@ const ShopifyCheckoutInit = () => {
 
   //
   useEffect(() => {
-    (async () => {
-      if (checkCheckoutComplete) {
-        console.log('checkout is visited, running checkout check!')
-        await getOrderStatus({ variables: { id: checkout.id } })
-        if (checkout.orderStatusUrl !== null) {
-          console.log('checkout is complete! get new checkout!')
-        }
+    if (checkCheckoutComplete) {
+      console.log('checkout is visited, running checkout check!')
+      getOrderStatus({ variables: { id: checkout.id } })
 
-        // clearInterval(checkCheckoutTimer)
-        // setCheckCheckoutTimer(null)
-      }
-      setCheckCheckoutComplete(false)
-    })()
+      // clearInterval(checkCheckoutTimer)
+      // setCheckCheckoutTimer(null)
+    }
+    setCheckCheckoutComplete(false)
   }, [checkCheckoutComplete])
 
   return (
