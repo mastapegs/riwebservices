@@ -117,8 +117,13 @@ const ShopifyCheckoutInit = () => {
     if (getOrderStatusLoading) console.log('getOrderStatusLoading')
     if (getOrderStatusError) console.log('getOrderStatusError')
     if (getOrderStatusData) {
-      console.log('getOrderStatus')
-      console.log(getOrderStatusData.node)
+      console.log('orderStatusUrl')
+      console.log(getOrderStatusData.node.orderStatusUrl)
+      if (getOrderStatusData.node.orderStatusUrl !== null) {
+        (async () => {
+          await createCheckout()
+        })()
+      }
     }
   }, [getOrderStatusLoading, getOrderStatusError, getOrderStatusData])
 
