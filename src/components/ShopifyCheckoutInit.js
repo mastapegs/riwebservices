@@ -31,7 +31,8 @@ const ShopifyCheckoutInit = () => {
     error: getOrderStatusError,
     data: getOrderStatusData,
   }] = useLazyQuery(CHECK_ORDER_STATUS, {
-    client: shopifyClient
+    client: shopifyClient,
+    pollInterval: 500,
   })
 
   const [createCheckout, {
@@ -116,7 +117,8 @@ const ShopifyCheckoutInit = () => {
     if (getOrderStatusLoading) console.log('getOrderStatusLoading')
     if (getOrderStatusError) console.log('getOrderStatusError')
     if (getOrderStatusData) {
-      console.log(getOrderStatusData)
+      console.log('getOrderStatus')
+      console.log(getOrderStatusData.node)
     }
   }, [getOrderStatusLoading, getOrderStatusError, getOrderStatusData])
 
@@ -130,10 +132,14 @@ const ShopifyCheckoutInit = () => {
   useEffect(() => {
     if (checkCheckoutComplete) {
       console.log('checkout is visited, running checkout check!')
-      getOrderStatus({ variables: { id: checkout.id } })
+      getOrderStatus({
+        variables: {
+          id: checkout.id
+        }
+      })
 
-      // clearInterval(checkCheckoutTimer)
-      // setCheckCheckoutTimer(null)
+      clearInterval(checkCheckoutTimer)
+      setCheckCheckoutTimer(null)
     }
     setCheckCheckoutComplete(false)
   }, [checkCheckoutComplete])
