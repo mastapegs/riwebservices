@@ -54,11 +54,7 @@ const ShopifyTest = ({ data }) => {
 
   const {
     checkout,
-    setCheckout,
-    checkCheckoutComplete,
-    setCheckCheckoutComplete,
-    checkCheckoutTimer,
-    setCheckCheckoutTimer
+    setCheckout
   } = useContext(ShopifyContext)
 
   // Modal useEffect
@@ -169,12 +165,7 @@ const ShopifyTest = ({ data }) => {
             <Button
               color='primary'
               variant='contained'
-              onClick={() => {
-                window.open(checkout.webUrl)
-                setCheckCheckoutTimer(
-                  setInterval(() => setCheckCheckoutComplete(true), 3000)
-                )
-              }}
+              onClick={() => window.open(checkout.webUrl)}
             >
               {'Checkout'}
             </Button>

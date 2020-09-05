@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import ShopifyContext from '../contexts/ShopifyContext'
 import shopifyClient from '../clients/shopifyClient'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client'
 import {
   CREATE_CHECKOUT,
   GET_CHECKOUT,
@@ -11,10 +11,6 @@ import {
 const ShopifyCheckoutInit = () => {
   const { checkout,
     setCheckout,
-    checkCheckoutComplete,
-    setCheckCheckoutComplete,
-    checkCheckoutTimer,
-    setCheckCheckoutTimer,
   } = useContext(ShopifyContext)
 
   const [getCheckout, {
@@ -26,11 +22,14 @@ const ShopifyCheckoutInit = () => {
     errorPolicy: 'all',
   })
 
-  const [getOrderStatus, {
+  const {
     loading: getOrderStatusLoading,
     error: getOrderStatusError,
     data: getOrderStatusData,
-  }] = useLazyQuery(CHECK_ORDER_STATUS, {
+  } = useQuery(CHECK_ORDER_STATUS, {
+    variables: {
+      id: checkout?.id
+    },
     client: shopifyClient,
     pollInterval: 500,
   })
@@ -132,22 +131,6 @@ const ShopifyCheckoutInit = () => {
     console.log('Checkout:')
     console.log(checkout)
   }, [checkout])
-
-  //
-  useEffect(() => {
-    if (checkCheckoutComplete) {
-      console.log('checkout is visited, running checkout check!')
-      getOrderStatus({
-        variables: {
-          id: checkout.id
-        }
-      })
-
-      clearInterval(checkCheckoutTimer)
-      setCheckCheckoutTimer(null)
-    }
-    setCheckCheckoutComplete(false)
-  }, [checkCheckoutComplete])
 
   return (
     <>
