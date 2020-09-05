@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Badge
+} from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail'
 import CreateIcon from '@material-ui/icons/Create'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShopifyContext from '../contexts/ShopifyContext'
 
 export default function SimpleBottomNavigation() {
   const location = useLocation()
@@ -15,6 +20,7 @@ export default function SimpleBottomNavigation() {
     return null
   }
   const [activeLink, setActiveLink] = React.useState(getPathname(location))
+  const { checkout } = useContext(ShopifyContext)
 
   useEffect(() => {
     switch (location?.pathname) {
@@ -77,7 +83,11 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'pricing'} label="Pricing" icon={<AttachMoneyIcon />} />
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
       <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
-      <BottomNavigationAction value={'shop'} label="Shop" icon={<ShoppingCartIcon />} />
+      <BottomNavigationAction value={'shop'} label="Shop" icon={
+        <Badge badgeContent={checkout?.lineItems?.edges?.length} color='secondary'>
+          <ShoppingCartIcon />
+        </Badge>
+      } />
     </BottomNavigation>
   );
 }
