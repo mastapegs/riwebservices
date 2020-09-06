@@ -258,7 +258,7 @@ const ContactForm = () => {
             timeout: 500,
           }}
         >
-          <ContactModalBody name={name} email={email} open={open} />
+          <div><ContactModalBody name={name} email={email} open={open} /></div>
         </Modal>
       </Container>
     </>

@@ -47,6 +47,7 @@ const ContactTable = () => {
                   contactScheme
                 }) => (
                     <ContactTableRow
+                      key={contactType}
                       contactData={contactData}
                       contactType={contactType}
                       contactScheme={contactScheme}

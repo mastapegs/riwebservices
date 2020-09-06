@@ -18,7 +18,7 @@ const ContactTableRow = ({ contactType, contactScheme, contactData }) => {
   const classes = useStyles()
   return (
     <>
-      <TableRow key={contactType}>
+      <TableRow>
         <TableCell>
           <Typography>
             {contactType}
