@@ -1,7 +1,8 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import LanguageIcon from '@material-ui/icons/Language'
 import { makeStyles } from '@material-ui/core/styles'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles(theme => ({
   links: {
     color: 'inherit',
     textDecoration: 'none'
+  },
+  title: {
+    flexGrow: 1
   }
 }))
 
@@ -25,9 +29,12 @@ const Header = () => {
       <AppBar position="relative">
         <Toolbar>
           <LanguageIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             RI Web Services
           </Typography>
+          <IconButton color='inherit'>
+            <ShoppingCartIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </>

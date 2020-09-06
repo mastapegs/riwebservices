@@ -10,7 +10,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail'
 import CreateIcon from '@material-ui/icons/Create'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ShopifyContext from '../contexts/ShopifyContext'
 
 export default function SimpleBottomNavigation() {
