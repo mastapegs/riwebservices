@@ -1,8 +1,9 @@
-import React from 'react'
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
+import React, { useContext } from 'react'
+import { AppBar, Toolbar, Typography, IconButton, Badge } from '@material-ui/core'
 import LanguageIcon from '@material-ui/icons/Language'
 import { makeStyles } from '@material-ui/core/styles'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import ShopifyContext from '../contexts/ShopifyContext'
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = () => {
   const classes = useStyles()
+  const { checkout } = useContext(ShopifyContext)
   return (
     <>
       <AppBar position="relative">
@@ -33,7 +35,16 @@ const Header = () => {
             RI Web Services
           </Typography>
           <IconButton color='inherit'>
-            <ShoppingCartIcon />
+            <Badge badgeContent={(() => {
+              if (!checkout) return
+              let sum = 0
+              checkout.lineItems.edges.forEach(({ node }) => {
+                sum += node.quantity
+              })
+              return sum
+            })()} color='secondary'>
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>

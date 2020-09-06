@@ -83,18 +83,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'pricing'} label="Pricing" icon={<AttachMoneyIcon />} />
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
       <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
-      <BottomNavigationAction value={'shop'} label="Shop" icon={
-        <Badge badgeContent={(() => {
-          if (!checkout) return
-          let sum = 0
-          checkout.lineItems.edges.forEach(({ node }) => {
-            sum += node.quantity
-          })
-          return sum
-        })()} color='secondary'>
-          <ShoppingCartIcon />
-        </Badge>
-      } />
+      <BottomNavigationAction value={'shop'} label="Shop" icon={<ShoppingCartIcon />} />
     </BottomNavigation>
   );
 }
