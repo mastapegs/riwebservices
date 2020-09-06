@@ -18,6 +18,7 @@ import {
   ADD_LINE,
   EMPTY_CART,
 } from '../queries/shopifyCartQueries'
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart'
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -177,6 +178,7 @@ const ShopifyTest = ({ data }) => {
               {'Checkout'}
             </Button>
             <Button
+              startIcon={<RemoveShoppingCartIcon />}
               color='secondary'
               variant='contained'
               onClick={() => {
