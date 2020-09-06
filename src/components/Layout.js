@@ -3,6 +3,7 @@ import Header from './Header'
 import BottomNav from './BottomNav'
 import { makeStyles } from '@material-ui/core/styles'
 import ShopifyCheckoutInit from './ShopifyCheckoutInit'
+import Cart from '../components/Cart'
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -20,6 +21,7 @@ const Layout = ({ children: page }) => {
         {page}
       </main>
       <BottomNav />
+      <Cart />
     </>
   )
 }

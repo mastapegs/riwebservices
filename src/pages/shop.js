@@ -8,7 +8,6 @@ import {
   CardActions,
   Grid,
   Fade,
-  Paper,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useMutation } from '@apollo/client'
@@ -16,9 +15,7 @@ import shopifyClient from '../clients/shopifyClient'
 import ShopifyContext from '../contexts/ShopifyContext'
 import {
   ADD_LINE,
-  EMPTY_CART,
 } from '../queries/shopifyCartQueries'
-import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart'
 
 const useStyles = makeStyles(theme => ({
   gridContainer: {
@@ -51,14 +48,6 @@ const ShopifyTest = ({ data }) => {
     client: shopifyClient,
   })
 
-  const [emptyCart, {
-    loading: emptyCartLoading,
-    error: emptyCartError,
-    data: emptyCartData,
-  }] = useMutation(EMPTY_CART, {
-    client: shopifyClient
-  })
-
   const {
     checkout,
     setCheckout
@@ -88,22 +77,6 @@ const ShopifyTest = ({ data }) => {
       })
     }
   }, [addLineLoading, addLineError, addLineData])
-
-  // emptyCart mutation useEffect
-  useEffect(() => {
-    if (emptyCartLoading) console.log('emptyCartLoading')
-    if (emptyCartError) {
-      // Checkout already completed
-      console.log('emptyCartError')
-      console.log(emptyCartError)
-    }
-    if (emptyCartData) {
-      console.log(emptyCartData)
-      setCheckout({
-        ...emptyCartData.checkoutLineItemsReplace.checkout
-      })
-    }
-  }, [emptyCartLoading, emptyCartError, emptyCartData])
 
   return (
     <>
@@ -162,42 +135,6 @@ const ShopifyTest = ({ data }) => {
           </Container>
         </div>
       </Fade>
-
-      {/* Shopping Cart Data for testing visibility */}
-      <Container>
-        <pre className={classes.checkoutData}>{JSON.stringify(checkout, null, 2)}</pre>
-        <Paper className={classes.checkoutPaper}>
-          <Container>
-            <p>This checkout button leads to Shopify's Test Payment Gateway</p>
-            <Button
-              color='primary'
-              variant='contained'
-              onClick={() => window.open(checkout.webUrl)}
-              className={classes.checkoutButton}
-            >
-              {'Checkout'}
-            </Button>
-            <Button
-              startIcon={<RemoveShoppingCartIcon />}
-              color='secondary'
-              variant='contained'
-              onClick={() => {
-                (async () => {
-                  await emptyCart({
-                    variables: {
-                      id: checkout.id
-                    }
-                  })
-                  return
-                })()
-              }}
-            >
-              {'Empty Cart'}
-            </Button>
-          </Container>
-        </Paper>
-      </Container>
-
     </>
   )
 }
