@@ -20,7 +20,8 @@ import { EMPTY_CART } from '../queries/shopifyCartQueries'
 
 const useStyles = makeStyles(theme => ({
   card: {
-    padding: theme.spacing(0, 2)
+    padding: theme.spacing(0, 2),
+    height: '100%'
   },
   productTitle: {
     fontWeight: "bold"
