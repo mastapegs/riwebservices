@@ -11,6 +11,11 @@ const CHECKOUT_FRAGMENT = gql`
           id
           quantity
           title
+          variant {
+          image {
+            src
+          }
+        }
         }
       }
     }
