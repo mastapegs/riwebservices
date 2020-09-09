@@ -91,7 +91,7 @@ const ShopifyTest = ({ data }) => {
                     const {
                       shopifyId,
                       title,
-                      description,
+                      descriptionHtml,
                       variants
                     } = node
                     return (
@@ -99,7 +99,7 @@ const ShopifyTest = ({ data }) => {
                         <Card className={classes.card}>
                           <CardContent>
                             <h2>{title}</h2>
-                            <p>{description}</p>
+                            <div dangerouslySetInnerHTML={{ __html: descriptionHtml }}></div>
                             <p>${parseInt(variants[0].price).toFixed(2)}</p>
                           </CardContent>
                           <CardActions>
@@ -147,7 +147,7 @@ export const query = graphql`
     edges {
       node {
         title
-        description
+        descriptionHtml
         shopifyId
         variants {
           shopifyId
