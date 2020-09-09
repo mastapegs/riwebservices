@@ -21,7 +21,10 @@ import { EMPTY_CART } from '../queries/shopifyCartQueries'
 const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(0, 2),
-    height: '100%'
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   productTitle: {
     fontWeight: "bold"
@@ -95,8 +98,10 @@ const Component = () => {
               <Grid container item spacing={3} xs={12} key={id}>
                 <Grid item xs={6}>
                   <Card className={classes.card}>
-                    <p className={classes.productTitle}>{`${title}`}</p>
-                    <p>{`Quantity: ${quantity}`}</p>
+                    <div>
+                      <p className={classes.productTitle}>{`${title}`}</p>
+                      <p>{`Quantity: ${quantity}`}</p>
+                    </div>
                   </Card>
                 </Grid>
                 <Grid item xs={6}>
