@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
-  }
+  },
 }))
 
 const Header = () => {
@@ -28,7 +28,7 @@ const Header = () => {
   const { checkout } = useContext(ShopifyContext)
   return (
     <>
-      <AppBar position="relative">
+      <AppBar position="fixed">
         <Toolbar>
           <LanguageIcon className={classes.icon} />
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
