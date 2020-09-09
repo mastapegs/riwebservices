@@ -18,6 +18,11 @@ import {
 } from '../queries/shopifyCartQueries'
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    img: {
+      width: '100%'
+    }
+  },
   gridContainer: {
     marginTop: theme.spacing(1),
     flexGrow: 1,
