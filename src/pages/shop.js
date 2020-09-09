@@ -143,7 +143,7 @@ export default ShopifyTest
 
 export const query = graphql`
   query allProducts {
-  allShopifyProduct {
+  allShopifyProduct(sort: {fields: title}) {
     edges {
       node {
         title
