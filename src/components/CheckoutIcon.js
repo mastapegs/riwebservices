@@ -1,5 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { useMutation } from '@apollo/client'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart'
 import {
   IconButton,
   Badge,
@@ -13,6 +15,8 @@ import {
 } from '@material-ui/core'
 import ShopifyContext from '../contexts/ShopifyContext'
 import { makeStyles } from '@material-ui/core/styles'
+import shopifyClient from '../clients/shopifyClient'
+import { EMPTY_CART } from '../queries/shopifyCartQueries'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -25,11 +29,36 @@ const useStyles = makeStyles(theme => ({
 
 const Component = () => {
   const [open, setOpen] = useState(false)
-  const { checkout } = useContext(ShopifyContext)
+  const { checkout, setCheckout } = useContext(ShopifyContext)
   const classes = useStyles()
+
+  const [emptyCart, {
+    loading: emptyCartLoading,
+    error: emptyCartError,
+    data: emptyCartData,
+  }] = useMutation(EMPTY_CART, {
+    client: shopifyClient
+  })
+
+  useEffect(() => {
+    if (emptyCartLoading) console.log('emptyCartLoading')
+    if (emptyCartError) {
+      // Checkout already completed	
+      console.log('emptyCartError')
+      console.log(emptyCartError)
+    }
+    if (emptyCartData) {
+      console.log(emptyCartData)
+      setCheckout({
+        ...emptyCartData.checkoutLineItemsReplace.checkout
+      })
+    }
+  }, [emptyCartLoading, emptyCartError, emptyCartData])
+
   const handleClose = () => {
     setOpen(false)
   }
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -71,6 +100,23 @@ const Component = () => {
             onClick={() => window.open(checkout.webUrl)}
           >
             {'Checkout'}
+          </Button>
+          <Button
+            startIcon={<RemoveShoppingCartIcon />}
+            color='secondary'
+            variant='contained'
+            onClick={() => {
+              (async () => {
+                await emptyCart({
+                  variables: {
+                    id: checkout.id
+                  }
+                })
+                return
+              })()
+            }}
+          >
+            {'Empty Cart'}
           </Button>
         </DialogActions>
       </Dialog>
