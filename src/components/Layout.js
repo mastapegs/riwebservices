@@ -7,7 +7,7 @@ import Cart from '../components/Cart'
 
 const useStyles = makeStyles(theme => ({
   main: {
-    margin: theme.spacing(5, 0)
+    margin: theme.spacing(10, 0)
   }
 }))
 
