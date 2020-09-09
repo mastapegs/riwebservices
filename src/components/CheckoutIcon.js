@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
   productTitle: {
     fontWeight: "bold"
+  },
+  pictureContainer: {
+    height: '100%'
   }
 }))
 
@@ -83,14 +86,22 @@ const Component = () => {
         <DialogTitle>Shopping Cart</DialogTitle>
         <DialogContent>
           <Grid container spacing={3}>
-            {checkout?.lineItems.edges.map(({ node: { id, quantity, title } }) => (
-              <Grid item xs={12} key={id}>
-                <Card className={classes.card}>
-                  <p className={classes.productTitle}>{`${title}`}</p>
-                  <p>{`Quantity: ${quantity}`}</p>
-                </Card>
+            {checkout?.lineItems.edges.map(({ node: { id, quantity, title, variant: { image: { src } } } }) => (
+              <Grid container item spacing={1} xs={12} key={id}>
+                <Grid item xs={6}>
+                  <Card className={classes.card}>
+                    <p className={classes.productTitle}>{`${title}`}</p>
+                    <p>{`Quantity: ${quantity}`}</p>
+                  </Card>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className={classes.picture}>
+                    <img src={src} />
+                  </div>
+                </Grid>
               </Grid>
             ))}
+
           </Grid>
         </DialogContent>
         <DialogActions>
