@@ -9,7 +9,7 @@ const Component = () => {
     <>
       <IconButton color='inherit'>
         <Badge badgeContent={(() => {
-          if (!checkout) return
+          if (!checkout) return 0
           let sum = 0
           checkout.lineItems.edges.forEach(({ node }) => {
             sum += node.quantity
