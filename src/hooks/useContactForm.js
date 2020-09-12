@@ -59,9 +59,8 @@ const useContactForm = () => {
       email,
       message,
     } = formFields
-    setSubmitDisabled(true)
     if (validationFailed()) return
-
+    setSubmitDisabled(true)
     const response = await fetch('/api/sendEmail', {
       method: 'POST',
       mode: 'cors',
