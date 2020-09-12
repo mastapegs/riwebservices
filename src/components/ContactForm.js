@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   Modal,
+  CircularProgress,
 } from '@material-ui/core'
 import useContactForm from '../hooks/useContactForm'
 import fields from '../data/contactFields'
@@ -23,13 +24,14 @@ const useStyles = makeStyles(theme => ({
 
 const ContactForm = () => {
   const classes = useStyles()
-  
+
   const {
     textFieldProps,
     submitButtonProps,
     modalProps,
     modalBodyProps,
     formProps,
+    submitDisabled,
   } = useContactForm()
 
   return (
@@ -55,7 +57,10 @@ const ContactForm = () => {
             color="primary"
             className={classes.submit}
           >
-            {'Submit'}
+            {(() => {
+              if (!submitDisabled) return 'Submit'
+              return (<CircularProgress color="primary" />)
+            })()}
           </Button>
         </form>
         <Modal
