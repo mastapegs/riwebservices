@@ -59,7 +59,7 @@ const ContactForm = () => {
           >
             {(() => {
               if (!submitDisabled) return 'Submit'
-              return (<CircularProgress color="primary" />)
+              return <CircularProgress color="primary" />
             })()}
           </Button>
         </form>
