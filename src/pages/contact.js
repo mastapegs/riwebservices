@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-  Fade,
+  Fade, Grid,
 } from '@material-ui/core'
 import ContactTable from '../components/ContactTable'
 import ContactForm from '../components/ContactForm'
@@ -35,12 +35,14 @@ const Contact = () => {
       />
       <Fade in={fadeIn}>
         <div>
-          <div className={classes.formContent}>
-            <ContactForm />
-          </div>
-          <div className={classes.heroContent}>
-            <ContactTable />
-          </div>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <ContactForm />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <ContactTable />
+            </Grid>
+          </Grid>
         </div>
       </Fade>
 

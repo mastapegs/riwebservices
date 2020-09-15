@@ -37,7 +37,7 @@ const ContactForm = () => {
   return (
     <>
       <Container>
-        <Typography gutterBottom component='h2' variant='h2' align='center'>
+        <Typography gutterBottom component='h1' variant='h2' align='center'>
           {'Start the Conversation'}
         </Typography>
         <form {...formProps} className={classes.form}>
