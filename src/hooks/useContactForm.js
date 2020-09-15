@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 import {
   InputAdornment,
   Backdrop,
 } from '@material-ui/core'
 
 const useContactForm = () => {
+
+  const ACTIONS = {
+    ON_CHANGE: 'on-change',
+    RESET_FORM: 'reset-form',
+    SET_FIELD_ERROR: 'field-error',
+    SUBMIT_DISABLED: 'set-submit-state',
+    MODAL_OPEN: 'set-modal-open-state',
+  }
   const initialFormFields = {
     name: '',
     businessName: '',
@@ -30,37 +38,78 @@ const useContactForm = () => {
     email: 'An email is required',
     message: 'A message is required',
   }
-  const [formFields, setFormFields] = useState(initialFormFields)
-  const [fieldErrors, setFieldErrors] = useState(initialErrors)
-  const [errorHelpers, setErrorHelpers] = useState(initialErrorHelpers)
-  const [submitDisabled, setSubmitDisabled] = useState(false)
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const contactFormInitialState = {
+    formFields: { ...initialFormFields },
+    fieldErrors: { ...initialErrors },
+    errorHelpers: { ...initialErrorHelpers },
+    submitDisabled: false,
+    modalIsOpen: false,
+  }
+  const contactFormReducer = (state, action) => {
+    switch (action.type) {
+      case ACTIONS.ON_CHANGE:
+        return {
+          ...state,
+          formFields: {
+            ...state.formFields,
+            [action.payload.field]: action.payload.value,
+          },
+        }
+      case ACTIONS.RESET_FORM:
+        return {
+          ...state,
+          formFields: { ...initialFormFields }
+        }
+      case ACTIONS.SET_FIELD_ERROR:
+        return {
+          ...state,
+          fieldErrors: {
+            ...state.fieldErrors,
+            [action.payload.field]: action.payload.error,
+          },
+          errorHelpers: {
+            ...state.errorHelpers,
+            [action.payload.field]: action.payload.error ? errorHelperMessages[action.payload.field] : initialErrorHelpers[action.payload.field],
+          }
+        }
+      case ACTIONS.SUBMIT_DISABLED:
+        return {
+          ...state,
+          submitDisabled: action.payload,
+        }
+      case ACTIONS.MODAL_OPEN:
+        return {
+          ...state,
+          modalIsOpen: action.payload
+        }
+      default:
+        return {
+          ...state,
+        }
+    }
+  }
+  const [contactFormState, formDispatch] = useReducer(contactFormReducer, contactFormInitialState)
 
   const onChange = e => {
     e.persist()
-    setFormFields(prevState => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-  }
-
-  const resetForm = () => {
-    setFormFields({
-      ...initialFormFields
-    })
+    formDispatch({ type: ACTIONS.ON_CHANGE, payload: { field: e.target.name, value: e.target.value } })
   }
 
   const onSubmit = async (event) => {
     event.preventDefault()
+
     const {
       name,
       businessName,
       phone,
       email,
       message,
-    } = formFields
+    } = contactFormState.formFields
+
     if (validationFailed()) return
-    setSubmitDisabled(true)
+
+    formDispatch({ type: ACTIONS.SUBMIT_DISABLED, payload: true })
+
     const response = await fetch('/api/sendEmail', {
       method: 'POST',
       mode: 'cors',
@@ -76,7 +125,7 @@ const useContactForm = () => {
         businessName,
         phone,
         email,
-        message
+        message,
       })
     }).catch(error => console.log(error))
     if (response) {
@@ -84,32 +133,19 @@ const useContactForm = () => {
       console.log(data)
     }
 
-    setModalIsOpen(true)
+    formDispatch({ type: ACTIONS.MODAL_OPEN, payload: true })
   }
 
   const validationFailed = () => {
     let error = false
+    const { formFields, fieldErrors } = contactFormState
     for (const field in formFields) {
       if (fieldErrors.hasOwnProperty(field)) {
         if (!formFields[field]) {
           error = true
-          setFieldErrors(prevState => ({
-            ...prevState,
-            [field]: true,
-          }))
-          setErrorHelpers(prevState => ({
-            ...prevState,
-            [field]: errorHelperMessages[field]
-          }))
+          formDispatch({ type: ACTIONS.SET_FIELD_ERROR, payload: { field, error: true } })
         } else {
-          setFieldErrors(prevState => ({
-            ...prevState,
-            [field]: false,
-          }))
-          setErrorHelpers(prevState => ({
-            ...prevState,
-            [field]: initialErrorHelpers[field]
-          }))
+          formDispatch({ type: ACTIONS.SET_FIELD_ERROR, payload: { field, error: false } })
         }
       }
     }
@@ -117,11 +153,12 @@ const useContactForm = () => {
   }
 
   const onModalClose = () => {
-    setModalIsOpen(false)
-    resetForm()
-    setSubmitDisabled(false)
+    formDispatch({ type: ACTIONS.MODAL_OPEN, payload: false })
+    formDispatch({ type: ACTIONS.RESET_FORM })
+    formDispatch({ type: ACTIONS.SUBMIT_DISABLED, payload: false })
   }
 
+  // Data comes from ./src/data/contactFields.js
   const textFieldProps = ({
     fieldName,
     icon = null,
@@ -137,9 +174,9 @@ const useContactForm = () => {
       rows: rows,
       id: fieldName,
       name: fieldName,
-      value: formFields[fieldName],
-      error: fieldErrors[fieldName],
-      helperText: errorHelpers[fieldName],
+      value: contactFormState.formFields[fieldName],
+      error: contactFormState.fieldErrors[fieldName],
+      helperText: contactFormState.errorHelpers[fieldName],
       onChange,
     }
     if (icon) {
@@ -156,11 +193,11 @@ const useContactForm = () => {
 
   const submitButtonProps = {
     type: "submit",
-    disabled: submitDisabled,
+    disabled: contactFormState.submitDisabled,
   }
 
   const modalProps = {
-    open: modalIsOpen,
+    open: contactFormState.modalIsOpen,
     closeAfterTransition: true,
     onClose: onModalClose,
     BackdropComponent: Backdrop,
@@ -170,9 +207,9 @@ const useContactForm = () => {
   }
 
   const modalBodyProps = () => ({
-    name: formFields.name,
-    email: formFields.email,
-    open: modalIsOpen,
+    name: contactFormState.formFields.name,
+    email: contactFormState.formFields.email,
+    open: contactFormState.modalIsOpen,
   })
 
   const formProps = {
@@ -186,7 +223,7 @@ const useContactForm = () => {
     modalProps,
     modalBodyProps,
     formProps,
-    submitDisabled,
+    submitDisabled: contactFormState.submitDisabled,
   }
 }
 
