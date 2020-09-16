@@ -12,6 +12,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
+  console.log(process.env.SHOPIFY_STOREFRONT_API_KEY)
   return {
     headers: {
       ...headers,
