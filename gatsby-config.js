@@ -66,7 +66,7 @@ module.exports = {
         // The domain name of your Shopify shop.
         shopName: `riwebservices.myshopify.com`,
         // The storefront access token
-        accessToken: `d6dd3608bb7ad64de3d807bb405cb461`,
+        accessToken: process.env.SHOPIFY_STOREFRONT_API_KEY,
       },
     },
   ],
