@@ -42,6 +42,10 @@ export default function SimpleBottomNavigation() {
       case '/shop/':
         setActiveLink('shop')
         break
+      case '/auth-test':
+      case '/auth-test/':
+        setActiveLink('auth')
+        break
       default:
         setActiveLink('')
     }
@@ -68,6 +72,9 @@ export default function SimpleBottomNavigation() {
           case 'shop':
             navigate('/shop')
             break
+          case 'auth':
+            navigate('/auth-test')
+            break
           default:
         }
       }}
@@ -83,6 +90,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
       <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
       <BottomNavigationAction value={'shop'} label="Shop" icon={<AddShoppingCartIcon />} />
+      <BottomNavigationAction value={'auth'} label="Auth" icon={<AddShoppingCartIcon />} />
     </BottomNavigation>
   );
 }
