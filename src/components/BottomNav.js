@@ -10,6 +10,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import ContactMailIcon from '@material-ui/icons/ContactMail'
 import CreateIcon from '@material-ui/icons/Create'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import ShopifyContext from '../contexts/ShopifyContext'
 
 export default function SimpleBottomNavigation() {
@@ -90,7 +91,7 @@ export default function SimpleBottomNavigation() {
       <BottomNavigationAction value={'contact'} label="Contact" icon={<ContactMailIcon />} />
       <BottomNavigationAction value={'blog'} label="Blog" icon={<CreateIcon />} />
       <BottomNavigationAction value={'shop'} label="Shop" icon={<AddShoppingCartIcon />} />
-      <BottomNavigationAction value={'auth'} label="Auth" icon={<AddShoppingCartIcon />} />
+      <BottomNavigationAction value={'auth'} label="Auth" icon={<VpnKeyIcon />} />
     </BottomNavigation>
   );
 }
