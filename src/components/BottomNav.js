@@ -20,7 +20,6 @@ export default function SimpleBottomNavigation() {
     return null
   }
   const [activeLink, setActiveLink] = React.useState(getPathname(location))
-  const { checkout } = useContext(ShopifyContext)
 
   useEffect(() => {
     switch (location?.pathname) {
