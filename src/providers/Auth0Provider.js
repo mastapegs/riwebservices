@@ -1,5 +1,20 @@
-import React from "react"
-import { Auth0Provider } from "@auth0/auth0-react";
+import React, { useEffect } from "react"
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+
+const Auth0Init = () => {
+  const { getAccessTokenSilently } = useAuth0()
+  useEffect(() => {
+    (async () => {
+      const value = getAccessTokenSilently()
+      console.log({ value })
+    })()
+  }, [getAccessTokenSilently])
+  return (
+    <>
+
+    </>
+  )
+}
 
 const CustomAuth0Provider = ({ children }) => {
   if (typeof window === `undefined`) return (<>{children}</>)
@@ -9,6 +24,7 @@ const CustomAuth0Provider = ({ children }) => {
       clientId="x38koCXqGcJcfZTCEc0aANFbe8FSDe5z"
       redirectUri={window.location.origin}
     >
+      <Auth0Init />
       {children}
     </Auth0Provider>
   )
